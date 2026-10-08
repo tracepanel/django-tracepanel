@@ -5,7 +5,7 @@ comes from (the culprit) and says how to fix it in Django's terms. Issues show i
 the badge's count), on the console's **Issues** page grouped across requests, and in the terminal line of tasks and
 commands.
 
-![The Issues tab of the panel: three N+1 queries with the fix for each](assets/screenshots/panel-issues.png)
+![The Issues tab of an API request made from Swagger UI: an N+1 with where it comes from and the fix](assets/screenshots/panel-issues.png)
 
 ![The console's Issues page: issues grouped across requests, with the endpoints they happen on and how often](assets/screenshots/console-issues.png)
 

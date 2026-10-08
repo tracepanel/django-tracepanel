@@ -18,7 +18,7 @@ INSTALLED_APPS += ["tracepanel.django"]
 
 That is the whole setup. With `DEBUG = True`, open any page of your app.
 
-![The panel docked under a Django page: the call tree of one request, with three N+1 queries in its template](assets/screenshots/panel-call-tree.png)
+![Swagger UI with the panel docked under it: the requests made with Try it out, and the call tree of one with two N+1 queries](assets/screenshots/panel-call-tree.png)
 
 ## What you get
 

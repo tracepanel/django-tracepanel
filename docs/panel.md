@@ -10,7 +10,7 @@ are picked up too, so a single-page app shows its API calls the same way.
 
 Click the badge for the panel. It docks at the bottom of the page or on the right, and can be resized.
 
-![The panel on a page: the requests of this page on the left, the call tree of the selected one on the right](assets/screenshots/panel-call-tree.png)
+![Swagger UI with the panel docked under it: the requests made with Try it out, and the call tree of one with two N+1 queries](assets/screenshots/panel-call-tree.png)
 
 On the left, the requests of this page, newest last. **Follow new** keeps the newest one selected as they arrive.
 
@@ -35,13 +35,9 @@ SQL
 Logs, Mail, Error
 :   The request's log records, the emails it sent (text and HTML), and its error with the stack and local variables.
 
-![The SQL tab: 151 queries folded into 4 statements, three of them N+1](assets/screenshots/panel-sql.png)
+![The SQL tab of an API request: 101 queries folded into 3 statements, two of them N+1](assets/screenshots/panel-sql.png)
 
 The panel opens on the tab you used last, except for a request with an error, which opens on **Error**.
-
-The admin is traced like any other page: its changelists are where N+1 queries hide most often.
-
-![The panel under a Django admin changelist](assets/screenshots/panel-admin.png)
 
 **Explore** jumps from the request to related views in the console: the same endpoint over time, the same query
 elsewhere. **Console** opens the trace there. The theme button switches light, dark and the system's.

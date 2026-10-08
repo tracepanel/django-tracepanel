@@ -2,7 +2,7 @@
 
 See what your Django app is really doing.
 
-![The tracepanel panel docked under a Django page: the call tree of one request, with three N+1 queries in its template](docs/assets/screenshots/panel-call-tree.png)
+![Swagger UI with the panel docked under it: the requests made with Try it out, and the call tree of one with two N+1 queries](docs/assets/screenshots/panel-call-tree.png)
 
 Every request, query and task of your Django app, traced: the SQL, cache calls, templates, signals, emails, logs and
 errors of each request, the tasks it queues, and what is worth fixing (N+1 queries with the `select_related()` that
@@ -35,9 +35,10 @@ Then open any page: the panel is at the bottom, and `/__tracepanel__/` is the co
 
 ## What it looks like
 
-Each issue comes with the fix, in Django's terms:
+Requests your pages and tools make with `fetch()` (here, Swagger UI's Try it out) show up in the panel too, each with
+the fix for what is wrong, in Django's terms:
 
-![The Issues tab: three N+1 queries, each with where it comes from and the select_related() or prefetch_related() that fixes it](docs/assets/screenshots/panel-issues.png)
+![The Issues tab of an API request made from Swagger UI: an N+1 with where it comes from and the fix](docs/assets/screenshots/panel-issues.png)
 
 The console shows every endpoint over time, with the slowest and the failing ones:
 
