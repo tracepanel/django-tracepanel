@@ -1,0 +1,127 @@
+# The documentation and the package, checked against tracepanel-python.
+#
+# Everything here builds on tracepanel-python: the docs' API reference is read from its code, tools/lint_docs.py
+# checks the pages against its settings, and the package installs it. That repository is private, so the
+# TRACEPANEL_PYTHON_TOKEN secret (read access to tracepanel/tracepanel-python) is required. It is checked out next to
+# this one, where uv.lock expects it (../tracepanel-python). Nothing is published.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  TOKEN: ${{ secrets.TRACEPANEL_PYTHON_TOKEN }}
+
+jobs:
+  docs:
+    name: Docs
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: django-tracepanel
+    steps:
+      - name: Require the token
+        working-directory: .
+        if: env.TOKEN == ''
+        run: |
+          echo "::error::Set the TRACEPANEL_PYTHON_TOKEN secret: read access to tracepanel/tracepanel-python."
+          exit 1
+
+      - uses: actions/checkout@v7
+        with:
+          path: django-tracepanel
+
+      - uses: actions/checkout@v7
+        with:
+          repository: tracepanel/tracepanel-python
+          token: ${{ env.TOKEN }}
+          path: tracepanel-python
+
+      - uses: astral-sh/setup-uv@v10
+        with:
+          working-directory: django-tracepanel
+
+      - run: uv sync --frozen
+
+      - name: Lint (tools, spelling, the pages against the code)
+        run: uv run poe lint
+
+      - name: "Build (strict: a broken link or reference fails it)"
+        run: uv run mkdocs build --strict --site-dir site
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: docs-site
+          path: django-tracepanel/site
+          retention-days: 14
+          if-no-files-found: error
+
+  package:
+    name: Package
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: django-tracepanel
+    steps:
+      - name: Require the token
+        working-directory: .
+        if: env.TOKEN == ''
+        run: |
+          echo "::error::Set the TRACEPANEL_PYTHON_TOKEN secret: read access to tracepanel/tracepanel-python."
+          exit 1
+
+      - uses: actions/checkout@v7
+        with:
+          path: django-tracepanel
+
+      - uses: actions/checkout@v7
+        with:
+          repository: tracepanel/tracepanel-python
+          token: ${{ env.TOKEN }}
+          path: tracepanel-python
+
+      - uses: astral-sh/setup-uv@v10
+        with:
+          working-directory: django-tracepanel
+
+      - name: Same version as tracepanel, pinned
+        run: |
+          uv run --no-project --python 3.13 python - <<'PY'
+          import tomllib
+          proxy = tomllib.load(open("pyproject.toml", "rb"))["project"]
+          tracepanel = tomllib.load(open("../tracepanel-python/pyproject.toml", "rb"))["project"]
+          expected = (tracepanel["version"], [f"tracepanel[django]=={tracepanel['version']}"])
+          found = (proxy["version"], proxy["dependencies"])
+          assert found == expected, f"django-tracepanel {found} does not match tracepanel {expected}"
+          print(f"django-tracepanel {proxy['version']} pins tracepanel[django]=={tracepanel['version']}")
+          PY
+
+      - name: Build
+        run: |
+          uv build --out-dir dist
+          uv build --wheel --out-dir ../wheels ../tracepanel-python
+
+      - name: Install as a user would, and import
+        run: |
+          uv venv ../try
+          uv pip install --python ../try --find-links ../wheels dist/django_tracepanel-*.whl
+          ../try/bin/python -c "import django, tracepanel.django; print('Django', django.get_version(), '+ tracepanel.django')"
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: django-tracepanel-dist
+          path: django-tracepanel/dist
+          retention-days: 30
+          if-no-files-found: error
