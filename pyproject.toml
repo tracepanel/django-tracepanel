@@ -1,0 +1,67 @@
+# django-tracepanel: the name Django developers search for. No code of its own: it installs tracepanel with Django
+# (`tracepanel[django]`) at the same version, so `pip install django-tracepanel` and `pip install "tracepanel[django]"`
+# are the same thing. Released together with tracepanel: keep `version` and the pin below equal to its version.
+[build-system]
+requires = ["hatchling>=1.32.4"]
+build-backend = "hatchling.build"
+
+[project]
+name = "django-tracepanel"
+version = "0.0.1"
+description = "See what your Django app is really doing: installs tracepanel with Django support."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["tracepanel[django]==0.0.1"]
+classifiers = [
+    "Framework :: Django",
+    "Framework :: Django :: 5.2",
+    "Framework :: Django :: 6.0",
+    "Framework :: Django :: 6.1",
+    "Programming Language :: Python :: 3",
+]
+
+[project.urls]
+Repository = "https://github.com/tracepanel/django-tracepanel"
+
+# A distribution with no modules: only the metadata above.
+[tool.hatch.build.targets.wheel]
+bypass-selection = true
+
+[tool.hatch.build.targets.sdist]
+include = ["pyproject.toml", "README.md"]
+
+[dependency-groups]
+docs = [
+    "mkdocs>=1.6.1,<2",
+    "mkdocs-material>=9.7.7",
+    "mkdocstrings[python]>=1.0.6",
+]
+dev = ["ruff>=0.16.10", "codespell>=2.4.3", "poethepoet>=0.48.0"]
+
+[tool.uv]
+default-groups = ["dev", "docs"]
+
+[tool.poe.tasks.docs]
+help = "Serve the documentation"
+cmd = "mkdocs serve"
+
+[tool.poe.tasks.docs-build]
+help = "Build the documentation as CI does: a broken link or reference fails it"
+cmd = "mkdocs build --strict"
+
+[tool.poe.tasks.lint]
+help = "Lint the tools and the documentation"
+sequence = ["ruff format --check tools", "ruff check tools", "codespell docs README.md", "python tools/lint_docs.py"]
+default_item_type = "cmd"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["COM812", "CPY", "D1", "D203", "D213", "S603", "T201", "INP001"]
+
+[tool.uv.sources]
+# Unpublished: resolve tracepanel from this checkout.
+tracepanel = { path = "../tracepanel-python", editable = true }

@@ -1,0 +1,77 @@
+site_name: tracepanel for Django
+site_description: "See what your Django app is really doing. Every request, query and task of your Django app, traced."
+repo_url: https://github.com/tracepanel/django-tracepanel
+repo_name: tracepanel/django-tracepanel
+edit_uri: ""
+
+theme:
+  name: material
+  logo: assets/logo.svg
+  favicon: assets/favicon.svg
+  font:
+    text: Inter
+    code: JetBrains Mono
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - content.code.copy
+    - navigation.expand
+    - navigation.top
+    - toc.follow
+    - navigation.footer
+
+nav:
+  - Overview: index.md
+  - Getting started: getting-started.md
+  - The panel and the console: panel.md
+  - What it finds: issues.md
+  - Integrations: integrations.md
+  - Configuration: configuration.md
+  - Command line: cli.md
+  - Your own spans: api.md
+  - How it works: how-it-works.md
+  - Safety: safety.md
+
+extra_css:
+  - assets/theme.css
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            show_source: false
+            show_root_heading: true
+            show_signature_annotations: true
+            separate_signature: true
+            members_order: source
+            filters: ["!^_"]
+            # traced() has typing overloads; the implementation's signature says it all.
+            show_overloads: false
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - toc:
+      permalink: true
