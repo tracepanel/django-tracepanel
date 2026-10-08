@@ -48,7 +48,7 @@ jobs:
           token: ${{ env.TOKEN }}
           path: tracepanel-python
 
-      - uses: astral-sh/setup-uv@v10
+      - uses: astral-sh/setup-uv@v10.2.0
         with:
           working-directory: django-tracepanel
 
@@ -92,7 +92,7 @@ jobs:
           token: ${{ env.TOKEN }}
           path: tracepanel-python
 
-      - uses: astral-sh/setup-uv@v10
+      - uses: astral-sh/setup-uv@v10.2.0
         with:
           working-directory: django-tracepanel
 
