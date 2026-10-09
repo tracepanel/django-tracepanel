@@ -1,9 +1,10 @@
 # The documentation and the package, checked against tracepanel-python.
 #
 # Everything here builds on tracepanel-python: the docs' API reference is read from its code, tools/lint_docs.py
-# checks the pages against its settings, and the package installs it. That repository is private, so the
-# TRACEPANEL_PYTHON_TOKEN secret (read access to tracepanel/tracepanel-python) is required. It is checked out next to
-# this one, where uv.lock expects it (../tracepanel-python). Nothing is published.
+# checks the pages against its settings, and the package installs it. tracepanel in turn requires tracepanel-agent,
+# built from its checkout. Both repositories are private, so the TRACEPANEL_PYTHON_TOKEN and TRACEPANEL_AGENT_TOKEN
+# secrets (read access to tracepanel/tracepanel-python and tracepanel/tracepanel-agent) are required. They are checked
+# out next to this one, where uv.lock expects them (../tracepanel-python, ../tracepanel-agent). Nothing is published.
 name: CI
 
 on:
@@ -21,6 +22,7 @@ permissions:
 
 env:
   TOKEN: ${{ secrets.TRACEPANEL_PYTHON_TOKEN }}
+  AGENT_TOKEN: ${{ secrets.TRACEPANEL_AGENT_TOKEN }}
 
 jobs:
   docs:
@@ -33,9 +35,9 @@ jobs:
     steps:
       - name: Require the token
         working-directory: .
-        if: env.TOKEN == ''
+        if: env.TOKEN == '' || env.AGENT_TOKEN == ''
         run: |
-          echo "::error::Set the TRACEPANEL_PYTHON_TOKEN secret: read access to tracepanel/tracepanel-python."
+          echo "::error::Set the TRACEPANEL_PYTHON_TOKEN and TRACEPANEL_AGENT_TOKEN secrets: read access to tracepanel/tracepanel-python and tracepanel/tracepanel-agent."
           exit 1
 
       - uses: actions/checkout@v7
@@ -47,6 +49,16 @@ jobs:
           repository: tracepanel/tracepanel-python
           token: ${{ env.TOKEN }}
           path: tracepanel-python
+
+      - uses: actions/checkout@v7
+        with:
+          repository: tracepanel/tracepanel-agent
+          token: ${{ env.AGENT_TOKEN }}
+          path: tracepanel-agent
+
+      - name: The agent's sources (its schema from tracepanel-python; no UI, nothing here serves the console)
+        working-directory: .
+        run: tracepanel-agent/scripts/schema.sh && mkdir -p tracepanel-agent/ui-dist
 
       - uses: astral-sh/setup-uv@v10.2.0
         with:
@@ -77,9 +89,9 @@ jobs:
     steps:
       - name: Require the token
         working-directory: .
-        if: env.TOKEN == ''
+        if: env.TOKEN == '' || env.AGENT_TOKEN == ''
         run: |
-          echo "::error::Set the TRACEPANEL_PYTHON_TOKEN secret: read access to tracepanel/tracepanel-python."
+          echo "::error::Set the TRACEPANEL_PYTHON_TOKEN and TRACEPANEL_AGENT_TOKEN secrets: read access to tracepanel/tracepanel-python and tracepanel/tracepanel-agent."
           exit 1
 
       - uses: actions/checkout@v7
@@ -91,6 +103,16 @@ jobs:
           repository: tracepanel/tracepanel-python
           token: ${{ env.TOKEN }}
           path: tracepanel-python
+
+      - uses: actions/checkout@v7
+        with:
+          repository: tracepanel/tracepanel-agent
+          token: ${{ env.AGENT_TOKEN }}
+          path: tracepanel-agent
+
+      - name: The agent's sources (its schema from tracepanel-python; no UI, nothing here serves the console)
+        working-directory: .
+        run: tracepanel-agent/scripts/schema.sh && mkdir -p tracepanel-agent/ui-dist
 
       - uses: astral-sh/setup-uv@v10.2.0
         with:
