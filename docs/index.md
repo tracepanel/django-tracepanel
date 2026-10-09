@@ -45,5 +45,5 @@ summary and a link to its trace.
 | Findings | the raw queries | N+1, duplicates, slow SQL, long transactions, errors, each with the fix in Django's terms |
 | History | the current request | a local store of recent traces, searchable |
 
-Nothing leaves your machine: traces are kept in a SQLite file in your project (`.tracepanel/`), and the console is
-served by your own app.
+Nothing leaves your machine: traces are kept in a SQLite file in your project (`.tracepanel/`), and the console is at
+your own app's address.

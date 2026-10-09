@@ -50,7 +50,7 @@ Only requests from this machine (or `INTERNAL_IPS`) can switch, and only from th
 
 ## The console
 
-`/__tracepanel__/` on your app, or `tracepanel console` on its own.
+`/__tracepanel__/` on your app, or the agent's own address (the terminal lines link to it, `tracepanel dev`: :8765).
 
 **Entry points.** One page per kind of work, shown once there is data for it:
 

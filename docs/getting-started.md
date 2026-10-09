@@ -59,10 +59,11 @@ the terminal:
 tracepanel ▸ task newsletter.tasks.send_digest · success · 230 ms · 14 queries · n+1 → http://127.0.0.1:8765/#/t/01M4…
 ```
 
-The link opens the trace in the console. When no web server is running, serve the console from the project's store:
+The link opens the trace in the console, which the tracepanel agent serves even with no web server running. To run
+it in the foreground, on a port of your choice:
 
 ```bash
-tracepanel console
+tracepanel dev
 ```
 
 ## Next

@@ -37,9 +37,10 @@ its value and the place it was set.
 | `service` | the directory's name | This project's name on the service map. |
 | `widget` | `true` | Add the panel's script to HTML pages. The headers are sent either way. |
 | `prefix` | `/__tracepanel__/` | Where the console, its API and the panel's script are served. |
-| `dir` | `.tracepanel` | The local store, relative to `root`. Add it to `.gitignore`. |
+| `dir` | `.tracepanel` | The project's store, relative to `root`. Add it to `.gitignore`. |
 | `max_traces` | `2000` | Traces kept in the store; older ones are deleted. |
-| `console_url` | `http://127.0.0.1:8765/` | Where `tracepanel console` serves: the terminal lines link to it. |
+| `agent` | `auto` | `auto`: the project's agent, started on the first trace. An address (`tcp:host.docker.internal:7701`) for one outside a container, or `off`: nothing is kept. |
+| `console_url` | `http://127.0.0.1:8765/` | The console of an agent given by address. |
 | `terminal_summary` | `true` | The line at startup and after each task and command. |
 | `n_plus_one_threshold` | `3` | Similar queries from one place reported as an N+1. |
 | `slow_sql_ms` | `100` | Queries slower than this are reported as slow SQL. |

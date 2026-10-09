@@ -30,13 +30,24 @@ records into it, in async code and `sync_to_async` threads too:
 | Errors | `got_request_exception` |
 
 When the response is ready, the trace gets its route (from Django's URL resolver), its view, its status and the user,
-if the view loaded one (tracepanel never queries for it). Then it is analysed ([What it finds](issues.md)) and handed
-to a background writer that stores it in SQLite under `.tracepanel/`.
+if the view loaded one (tracepanel never queries for it). Then a background thread sends it to the tracepanel agent.
 
 The response gets the headers the badge reads (`Tracepanel-Id`, `Tracepanel-Url`, `Server-Timing`) and, for an HTML
 page, the panel's script.
 
-Requests under `/__tracepanel__/` are answered by tracepanel itself: the console, its API and the panel's script.
+Requests under `/__tracepanel__/` go to the agent, which serves the console, its API and the panel's script; `EXPLAIN`
+and switching the user stay in your app, which has the database connections and the sessions.
+
+## The agent
+
+`pip install django-tracepanel` brings the tracepanel agent, a small program of its own. The first trace starts it for
+the project; it keeps running across `runserver`'s reloads and workers, one per project, and exits after 30 minutes
+with nothing to do. It finds the issues in each trace ([What it finds](issues.md)), keeps the traces in a SQLite file
+under `.tracepanel/` and serves the console. The badge shows a request's status and time at once, its issues a moment
+later, once the agent has them.
+
+`tracepanel dev` runs it in the foreground instead ([Command line](cli.md)). Where it can't run, tracepanel says why in
+the terminal: requests keep their headers, and nothing is kept.
 
 ## Outside requests
 
@@ -45,5 +56,6 @@ show in its call tree; their runs are traces of their own, linked back to it.
 
 ## The cost
 
-tracepanel is a development tool. Collecting a trace adds little to a request; analysing it and writing it to SQLite
-happen after the response is made, on another thread. Nothing is collected when tracepanel is off.
+tracepanel is a development tool. Collecting a trace adds little to a request; sending it happens after the response
+is made, on another thread, and finding its issues and storing it in another process. Nothing is collected when
+tracepanel is off.

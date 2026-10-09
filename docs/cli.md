@@ -16,15 +16,16 @@ even with `DEBUG = False`. `--set` sets a setting for this run:
 tracepanel run --set slow_sql_ms=50 python manage.py runserver
 ```
 
-## `tracepanel console`
+## `tracepanel dev`
 
 ```bash
-tracepanel console [--host 127.0.0.1] [--port 8765] [--dir .tracepanel]
+tracepanel dev [--host 127.0.0.1] [--port 8765]
 ```
 
-Serves the console from the project's store, with no Django running: for a project whose only work is in workers, or
-to read the traces after the server has stopped. The terminal lines of tasks and commands link to it. Read only:
-`EXPLAIN` and switching the user need the app.
+Runs the tracepanel agent in the foreground: it receives the project's traces and serves the console on
+http://127.0.0.1:8765/, with no Django running. Without it the first trace starts the agent in the background, so this
+is for watching its output, or for reading the traces after the server has stopped. `EXPLAIN` and switching the user
+need the app: they are at `/__tracepanel__/`.
 
 ## `tracepanel config`
 
