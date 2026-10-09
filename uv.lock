@@ -835,12 +835,13 @@ requires-dist = [
     { name = "falcon", marker = "extra == 'falcon'", specifier = ">=4.0" },
     { name = "fastapi", marker = "extra == 'fastapi'", specifier = ">=0.142" },
     { name = "flask", marker = "extra == 'flask'", specifier = ">=3.0" },
+    { name = "opentelemetry-sdk", marker = "extra == 'otel'", specifier = ">=1.45" },
     { name = "rq", marker = "extra == 'rq'", specifier = ">=2.0" },
     { name = "sqlalchemy", marker = "extra == 'sqlalchemy'", specifier = ">=2.0" },
     { name = "starlette", marker = "extra == 'starlette'", specifier = ">=0.40" },
     { name = "strawberry-graphql", marker = "extra == 'strawberry'", specifier = ">=0.250" },
 ]
-provides-extras = ["django", "celery", "dramatiq", "rq", "channels", "strawberry", "fastapi", "starlette", "flask", "falcon", "sqlalchemy", "ninja", "drf"]
+provides-extras = ["django", "celery", "dramatiq", "rq", "channels", "strawberry", "fastapi", "starlette", "flask", "falcon", "sqlalchemy", "ninja", "drf", "otel"]
 
 [package.metadata.requires-dev]
 celery = [{ name = "celery", specifier = ">=5.6.3" }]
@@ -885,6 +886,7 @@ flask = [
     { name = "sqlalchemy", specifier = ">=2.1.4" },
 ]
 ninja = [{ name = "django-ninja", specifier = ">=1.7.1" }]
+otel = [{ name = "opentelemetry-sdk", specifier = ">=1.45.1" }]
 postgres = [{ name = "psycopg", extras = ["binary"], specifier = ">=3.2" }]
 rq = [
     { name = "fakeredis", specifier = ">=2.39.0" },
