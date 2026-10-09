@@ -27,6 +27,15 @@ http://127.0.0.1:8765/, with no Django running. Without it the first trace start
 is for watching its output, or for reading the traces after the server has stopped. `EXPLAIN` and switching the user
 need the app: they are at `/__tracepanel__/`.
 
+## `tracepanel mcp`
+
+```bash
+tracepanel mcp [--values]
+```
+
+An MCP server on stdin and stdout for AI coding agents: they read the project's traces and issues through it. Run from
+the project's directory; see [AI coding agents](ai-agents.md).
+
 ## `tracepanel config`
 
 Prints every setting, its value and where it was set, then the integrations: on, not installed, or turned off.
