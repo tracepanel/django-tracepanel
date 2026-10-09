@@ -16,6 +16,25 @@ the libraries it finds installed. Each one is on as soon as its library is there
 | Django Tasks | `django_tasks_enabled` | The same for `django.tasks` (and the `django-tasks` backport). |
 | Channels | `channels_enabled` | WebSocket events as traces; group messages linked to their sender. |
 | Strawberry | `strawberry_enabled` | GraphQL requests named after the operation; resolvers as spans; errors behind HTTP 200 recorded. |
+| OpenTelemetry | `otel_enabled` | Spans from the OpenTelemetry instrumentations you enable (httpx, requests, redis, boto3, gRPC…) in the call tree, and the services they call on the Services map. See below. |
+
+## OpenTelemetry
+
+Libraries tracepanel has no integration for may have an OpenTelemetry instrumentation. Enable it as usual and its
+spans show up in the request, task or job they ran in, under the span that was current:
+
+```python
+from opentelemetry import trace
+from opentelemetry.instrumentation.httpx import HTTPXClientInstrumentor
+from opentelemetry.sdk.trace import TracerProvider
+
+trace.set_tracer_provider(TracerProvider())  # or your own, with its exporters; or `opentelemetry-instrument`
+HTTPXClientInstrumentor().instrument()
+```
+
+tracepanel joins the `TracerProvider` the project sets (before or after Django starts) and never sets one itself,
+so exporters configured for it keep working. Spans of what tracepanel records itself (Django, SQL, Celery, logging)
+are left out, so nothing shows twice. It needs `opentelemetry-sdk`, which a project using OpenTelemetry has already.
 
 ## Tasks
 

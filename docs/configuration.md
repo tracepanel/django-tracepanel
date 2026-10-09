@@ -53,4 +53,4 @@ its value and the place it was set.
 | `ignore_tasks` | none | Tasks not traced: glob patterns on the task name, e.g. `celery.backend_cleanup`. |
 | `ignore_loggers` | none | Loggers left out, with their children. |
 | `ignore_commands` | servers, shells and workers | Management commands not traced (`runserver`, `shell`, `test`, `rqworker`, …). |
-| `celery_enabled`, `channels_enabled`, `django_tasks_enabled`, `dramatiq_enabled`, `drf_enabled`, `logging_enabled`, `ninja_enabled`, `rq_enabled`, `strawberry_enabled` | `true` | One per [integration](integrations.md): `false` leaves that library untouched. Read at startup. |
+| `celery_enabled`, `channels_enabled`, `django_tasks_enabled`, `dramatiq_enabled`, `drf_enabled`, `logging_enabled`, `ninja_enabled`, `otel_enabled`, `rq_enabled`, `strawberry_enabled` | `true` | One per [integration](integrations.md): `false` leaves that library untouched. Read at startup. |
