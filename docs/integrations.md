@@ -1,7 +1,7 @@
 # Integrations
 
 Django itself is covered out of the box: SQL (every connection, `async` ORM included), transactions and `on_commit()`,
-the view, templates, the cache, signals, emails, management commands and `sync_to_async`. On top, tracepanel traces
+the view, templates, the cache, signals, emails, management commands and `sync_to_async`. On top, Tracepanel traces
 the libraries it finds installed. Each one is on as soon as its library is there; turn one off with its setting
 (`drf_enabled = False`, or `TRACEPANEL_DRF_ENABLED=false`). `tracepanel config` lists them and says which are on.
 
@@ -20,7 +20,7 @@ the libraries it finds installed. Each one is on as soon as its library is there
 
 ## OpenTelemetry
 
-Libraries tracepanel has no integration for may have an OpenTelemetry instrumentation. Enable it as usual and its
+Libraries Tracepanel has no integration for may have an OpenTelemetry instrumentation. Enable it as usual and its
 spans show up in the request, task or job they ran in, under the span that was current:
 
 ```python
@@ -32,8 +32,8 @@ trace.set_tracer_provider(TracerProvider())  # or your own, with its exporters; 
 HTTPXClientInstrumentor().instrument()
 ```
 
-tracepanel joins the `TracerProvider` the project sets (before or after Django starts) and never sets one itself,
-so exporters configured for it keep working. Spans of what tracepanel records itself (Django, SQL, Celery, logging)
+Tracepanel joins the `TracerProvider` the project sets (before or after Django starts) and never sets one itself,
+so exporters configured for it keep working. Spans of what Tracepanel records itself (Django, SQL, Celery, logging)
 are left out, so nothing shows twice. It needs `opentelemetry-sdk`, which a project using OpenTelemetry has already.
 
 ## Tasks

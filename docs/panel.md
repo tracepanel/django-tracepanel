@@ -26,7 +26,7 @@ Call tree
     to one kind of span; similar queries fold into one row with a count.
 
 Issues
-:   What tracepanel found in this request, with the fix ([What it finds](issues.md)).
+:   What Tracepanel found in this request, with the fix ([What it finds](issues.md)).
 
 SQL
 :   Every query with its time and where in your code it came from. **Explain** runs `EXPLAIN` on the query and shows

@@ -1,9 +1,9 @@
 # Configuration
 
-tracepanel works with no settings. Each setting can be set in four places; a later one wins over an earlier one:
+Tracepanel works with no settings. Each setting can be set in four places; a later one wins over an earlier one:
 
 1. `tracepanel.toml`, or `[tool.tracepanel]` in `pyproject.toml`, found from the project's directory upward;
-2. the `TRACEPANEL` dict in Django's settings (`DEBUG` turns tracepanel on, `BASE_DIR` is the project's directory);
+2. the `TRACEPANEL` dict in Django's settings (`DEBUG` turns Tracepanel on, `BASE_DIR` is the project's directory);
 3. `tracepanel.core.conf.configure()` in code;
 4. `TRACEPANEL_<NAME>` environment variables (lists comma-separated).
 
@@ -32,7 +32,7 @@ its value and the place it was set.
 
 | Setting | Default | What it does |
 | --- | --- | --- |
-| `enabled` | `DEBUG` | Whether tracepanel records anything. `TRACEPANEL_ENABLED` (set by `tracepanel run`) wins over `DEBUG`. |
+| `enabled` | `DEBUG` | Whether Tracepanel records anything. `TRACEPANEL_ENABLED` (set by `tracepanel run`) wins over `DEBUG`. |
 | `root` | `BASE_DIR` | The project's directory: stack paths are shown relative to it, and the store lives in it. |
 | `service` | the directory's name | This project's name on the service map. |
 | `widget` | `true` | Add the panel's script to HTML pages. The headers are sent either way. |

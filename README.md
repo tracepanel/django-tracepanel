@@ -24,7 +24,7 @@ Add the app to your settings. It is on whenever `DEBUG = True`:
 INSTALLED_APPS += ["tracepanel.django"]
 ```
 
-Or leave the settings as they are and start the server through `tracepanel run`, which also turns tracepanel on with
+Or leave the settings as they are and start the server through `tracepanel run`, which also turns Tracepanel on with
 `DEBUG = False`:
 
 ```bash

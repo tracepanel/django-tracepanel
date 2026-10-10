@@ -1,6 +1,6 @@
 # What it finds
 
-tracepanel reads every trace as it ends and reports what is worth fixing. Each issue names the line of your code it
+Tracepanel reads every trace as it ends and reports what is worth fixing. Each issue names the line of your code it
 comes from (the culprit) and says how to fix it in Django's terms. Issues show in the panel (the **Issues** tab and
 the badge's count), on the console's **Issues** page grouped across requests, and in the terminal line of tasks and
 commands.
@@ -18,7 +18,7 @@ for post in Post.objects.all():
     print(post.author.name)  # one SELECT per post
 ```
 
-tracepanel reports it when similar queries (the same statement with different parameters) run at least
+Tracepanel reports it when similar queries (the same statement with different parameters) run at least
 `n_plus_one_threshold` times (3 by default) from the same place. The fix depends on the relation:
 
 - a ForeignKey or one-to-one, looked up by its key: `select_related("author")`, one query with a join;

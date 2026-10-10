@@ -13,7 +13,7 @@ def checkout(cart):
         charge(cart.owner, total)
 ```
 
-Queries, logs and errors inside a span attach to it. Outside a trace, and when tracepanel is off, all of these do
+Queries, logs and errors inside a span attach to it. Outside a trace, and when Tracepanel is off, all of these do
 nothing, so they can stay in the code.
 
 ```python

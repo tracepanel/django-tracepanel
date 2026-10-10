@@ -1,10 +1,10 @@
-# tracepanel for Django
+# Tracepanel for Django
 
 See what your Django app is really doing.
 
 **Every request, query and task of your Django app, traced.** Each request your app serves becomes a trace: its
 SQL, cache calls, templates, signals, emails, logs, the tasks it queues and the errors it raises, in the order they
-happened. tracepanel reads the trace for you and points at what to fix: an N+1 with the `select_related()` that
+happened. Tracepanel reads the trace for you and points at what to fix: an N+1 with the `select_related()` that
 removes it, duplicate queries, slow SQL, a transaction that holds its locks too long.
 
 ```bash
@@ -37,7 +37,7 @@ summary and a link to its trace.
 
 ## How it differs from django-debug-toolbar
 
-| | django-debug-toolbar | tracepanel |
+| | django-debug-toolbar | Tracepanel |
 | --- | --- | --- |
 | What it sees | the HTML page you are on | every request, `fetch()`, API call, task and command |
 | JSON APIs, SPAs | needs a page to attach to | the same panel, and headers any client can read |

@@ -1,6 +1,6 @@
 # Getting started
 
-tracepanel supports Django 5.2 and newer on Python 3.11 and newer.
+Tracepanel supports Django 5.2 and newer on Python 3.11 and newer.
 
 ## Install
 
@@ -22,7 +22,7 @@ the whole request) and answers under `/__tracepanel__/` itself.
 
 ## Turn it on
 
-tracepanel is on when `DEBUG = True`, and does nothing at all otherwise: no middleware, no patches. Start the server as
+Tracepanel is on when `DEBUG = True`, and does nothing at all otherwise: no middleware, no patches. Start the server as
 usual:
 
 ```bash
@@ -39,14 +39,14 @@ Open any page: a badge appears in the bottom right corner. Click it for the pane
 
 ## Without changing settings
 
-`tracepanel run` starts any command with tracepanel on, without touching the project:
+`tracepanel run` starts any command with Tracepanel on, without touching the project:
 
 ```bash
 tracepanel run python manage.py runserver
 tracepanel run celery -A config worker
 ```
 
-It adds `tracepanel.django` to `INSTALLED_APPS` as Django reads the settings, and turns tracepanel on even when
+It adds `tracepanel.django` to `INSTALLED_APPS` as Django reads the settings, and turns Tracepanel on even when
 `DEBUG` is off (useful to look at production-like settings locally). With the app already in `INSTALLED_APPS`, it
 changes nothing more: one middleware, one trace per request.
 
@@ -59,7 +59,7 @@ the terminal:
 tracepanel ▸ task newsletter.tasks.send_digest · success · 230 ms · 14 queries · n+1 → http://127.0.0.1:8765/#/t/01M4…
 ```
 
-The link opens the trace in the console, which the tracepanel agent serves even with no web server running. To run
+The link opens the trace in the console, which the Tracepanel agent serves even with no web server running. To run
 it in the foreground, on a port of your choice:
 
 ```bash
@@ -69,5 +69,5 @@ tracepanel dev
 ## Next
 
 - [The panel and the console](panel.md): what each part shows.
-- [What it finds](issues.md): the issues tracepanel reports, and how to fix them.
+- [What it finds](issues.md): the issues Tracepanel reports, and how to fix them.
 - [Configuration](configuration.md): every setting.
