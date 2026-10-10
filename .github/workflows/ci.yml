@@ -60,7 +60,7 @@ jobs:
         working-directory: .
         run: tracepanel/scripts/schema.sh && mkdir -p tracepanel/ui-dist
 
-      - uses: astral-sh/setup-uv@v10.2.0
+      - uses: astral-sh/setup-uv@v10.3.0
         with:
           working-directory: django-tracepanel
 
@@ -114,7 +114,7 @@ jobs:
         working-directory: .
         run: tracepanel/scripts/schema.sh && mkdir -p tracepanel/ui-dist
 
-      - uses: astral-sh/setup-uv@v10.2.0
+      - uses: astral-sh/setup-uv@v10.3.0
         with:
           working-directory: django-tracepanel
 
