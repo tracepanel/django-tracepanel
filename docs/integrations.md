@@ -1,27 +1,30 @@
 # Integrations
 
-Django itself is covered out of the box: SQL (every connection, `async` ORM included), transactions and `on_commit()`,
-the view, templates, the cache, signals, emails, management commands and `sync_to_async`. On top, Tracepanel traces
-the libraries it finds installed. Each one is on as soon as its library is there; turn one off with its setting
-(`drf_enabled = False`, or `TRACEPANEL_DRF_ENABLED=false`). `tracepanel config` lists them and says which are on.
+Tracepanel records these parts of Django with no setup: SQL, transactions and `on_commit()`, the view, templates, the
+cache, signals, emails, management commands and `sync_to_async`. For SQL, it records every connection and the `async`
+ORM.
+
+Tracepanel also traces the libraries it finds installed. Each integration is on as soon as its library is installed.
+To turn one off, use its setting, such as `drf_enabled = False` or `TRACEPANEL_DRF_ENABLED=false`. `tracepanel config`
+lists the integrations and shows which are on.
 
 | Integration | Setting | What you get |
 | --- | --- | --- |
-| logging | `logging_enabled` | Log records of the request, attached to the span they were logged in. No handler is added: your logging setup is unchanged. |
-| Django REST framework | `drf_enabled` | The view named after the ViewSet action (`PostViewSet.list`); auth, permissions (which class refused, and why), throttles, validation (the 400's errors) and serialization as steps. |
-| Django Ninja | `ninja_enabled` | The view named after the operation's function; auth, input validation (the 422's errors) and response serialization as steps. |
-| Celery | `celery_enabled` | Each task run as a trace, linked to the request that queued it; retries and failures; arguments and results. |
+| logging | `logging_enabled` | Log records of the request, attached to the span they were logged in. Tracepanel adds no handler, so your logging setup stays the same. |
+| Django REST framework | `drf_enabled` | The view named after the ViewSet action (`PostViewSet.list`). Auth, permissions with the class that refused and why, throttles, validation with the 400's errors, and serialization as steps. |
+| Django Ninja | `ninja_enabled` | The view named after the operation's function. Auth, input validation with the 422's errors, and response serialization as steps. |
+| Celery | `celery_enabled` | Each task run as a trace, linked to the request that queued it. Retries and failures, arguments and results. |
 | RQ | `rq_enabled` | The same for RQ jobs, through RQ's forking worker. |
 | Dramatiq | `dramatiq_enabled` | The same for Dramatiq actors. |
-| Django Tasks | `django_tasks_enabled` | The same for `django.tasks` (and the `django-tasks` backport). |
-| Channels | `channels_enabled` | WebSocket events as traces; group messages linked to their sender. |
-| Strawberry | `strawberry_enabled` | GraphQL requests named after the operation; resolvers as spans; errors behind HTTP 200 recorded. |
+| Django Tasks | `django_tasks_enabled` | The same for `django.tasks` and the `django-tasks` backport. |
+| Channels | `channels_enabled` | WebSocket events as traces. Group messages linked to their sender. |
+| Strawberry | `strawberry_enabled` | GraphQL requests named after the operation, and resolvers as spans. Tracepanel records errors returned with HTTP 200. |
 | OpenTelemetry | `otel_enabled` | Spans from the OpenTelemetry instrumentations you enable (httpx, requests, redis, boto3, gRPC…) in the call tree, and the services they call on the Services map. See below. |
 
 ## OpenTelemetry
 
-Libraries Tracepanel has no integration for may have an OpenTelemetry instrumentation. Enable it as usual and its
-spans show up in the request, task or job they ran in, under the span that was current:
+A library that Tracepanel has no integration for may have an OpenTelemetry instrumentation. Enable the instrumentation
+as usual. Its spans show up in the request, task or job they ran in, under the span that was current:
 
 ```python
 from opentelemetry import trace
@@ -32,18 +35,20 @@ trace.set_tracer_provider(TracerProvider())  # or your own, with its exporters; 
 HTTPXClientInstrumentor().instrument()
 ```
 
-Tracepanel joins the `TracerProvider` the project sets (before or after Django starts) and never sets one itself,
-so exporters configured for it keep working. Spans of what Tracepanel records itself (Django, SQL, Celery, logging)
-are left out, so nothing shows twice. It needs `opentelemetry-sdk`, which a project using OpenTelemetry has already.
+Tracepanel joins the `TracerProvider` that the project sets, before or after Django starts. Tracepanel never sets a
+provider itself, so the exporters you configured for it keep working. Tracepanel drops OpenTelemetry spans for what it
+records itself, such as Django, SQL, Celery and logging, so nothing shows twice. The integration needs
+`opentelemetry-sdk`, which a project that uses OpenTelemetry already has.
 
 ## Tasks
 
-A task queued during a request shows in the request's call tree, and its run is a trace of its own that links back
-to it, so a slow page and the work it left behind read together.
+A task queued during a request shows in the request's call tree. Each run of the task is a trace of its own that links
+back to the request.
 
 ![The console's Tasks page: runs and latency over time, the slowest and the failing tasks](assets/screenshots/console-tasks.png)
- A worker started with `tracepanel run` (or with
-`tracepanel.django` in `INSTALLED_APPS`) prints a line per task with a link to its trace.
+
+A worker started with `tracepanel run`, or with `tracepanel.django` in `INSTALLED_APPS`, prints a line per task with a
+link to its trace:
 
 ```bash
 tracepanel run celery -A config worker
@@ -51,4 +56,4 @@ tracepanel run celery -A config worker
 
 ## Settings changed at startup
 
-Integrations are installed when the app starts. Changing an `*_enabled` setting needs a restart.
+Tracepanel installs the integrations when the app starts. After you change an `*_enabled` setting, restart the app.

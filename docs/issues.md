@@ -1,9 +1,9 @@
 # What it finds
 
 Tracepanel reads every trace as it ends and reports what is worth fixing. Each issue names the line of your code it
-comes from (the culprit) and says how to fix it in Django's terms. Issues show in the panel (the **Issues** tab and
-the badge's count), on the console's **Issues** page grouped across requests, and in the terminal line of tasks and
-commands.
+comes from, called the culprit, and says how to fix it in Django's terms. The panel shows issues in the **Issues** tab
+and in the badge's count. The console's **Issues** page groups them across requests. Tasks and commands show them in
+their terminal line.
 
 ![The Issues tab of an API request made from Swagger UI: an N+1 with where it comes from and the fix](assets/screenshots/panel-issues.png)
 
@@ -11,40 +11,42 @@ commands.
 
 ## N+1 queries
 
-The same query, run once per row of an earlier result:
+An N+1 is the same query, run once per row of an earlier result:
 
 ```python
 for post in Post.objects.all():
     print(post.author.name)  # one SELECT per post
 ```
 
-Tracepanel reports it when similar queries (the same statement with different parameters) run at least
-`n_plus_one_threshold` times (3 by default) from the same place. The fix depends on the relation:
+Similar queries are the same statement with different parameters. Tracepanel reports an N+1 when similar queries run
+from the same place at least `n_plus_one_threshold` times. The default is 3. The fix depends on the relation:
 
-- a ForeignKey or one-to-one, looked up by its key: `select_related("author")`, one query with a join;
-- a reverse or many-to-many relation: `prefetch_related("tags")`, one extra query for all rows.
+- For a ForeignKey or one-to-one relation looked up by its key, use `select_related("author")`. It makes one query
+  with a join.
+- For a reverse or many-to-many relation, use `prefetch_related("tags")`. It makes one extra query for all rows.
 
-An N+1 inside library code still counts when your view started it: a nested DRF serializer reading `author.username`
-is reported against the view. In GraphQL resolvers, the hint suggests a DataLoader.
+An N+1 inside library code still counts when your view started it. For example, Tracepanel reports a nested DRF
+serializer that reads `author.username` against the view. In GraphQL resolvers, the hint suggests a DataLoader.
 
 ## Duplicate queries
 
-The same query with the same parameters, run more than once in a request: run it once and reuse the result.
+Tracepanel reports a query that runs more than once in a request with the same parameters. Run it once and reuse the
+result.
 
 ## Slow SQL
 
-A query slower than `slow_sql_ms` (100 ms by default). **Explain** on the query shows the plan, and points at full
-scans.
+Tracepanel reports a query slower than `slow_sql_ms`. The default is 100 ms. **Explain** on the query shows the plan
+and points at full scans.
 
 ## Long transactions
 
-An outer `atomic()` block that stays open longer than `long_transaction_ms` (500 ms by default). Rows it locked stay
-locked until `COMMIT`; keep slow work (HTTP calls, emails, heavy Python) out of the block. `on_commit()` callbacks run
-after the commit and are not counted.
+Tracepanel reports an outer `atomic()` block that stays open longer than `long_transaction_ms`. The default is
+500 ms. The rows the block locked stay locked until `COMMIT`. Keep slow work such as HTTP calls, emails and heavy Python
+out of the block. `on_commit()` callbacks run after the commit, and Tracepanel doesn't count them.
 
 ## Work inside a transaction
 
-Things that should wait for the commit:
+Some work inside `atomic()` should wait for the commit:
 
 | Inside `atomic()` | Why it matters | Fix |
 | --- | --- | --- |
@@ -54,10 +56,10 @@ Things that should wait for the commit:
 
 ## Errors
 
-Unhandled exceptions, with the stack (your frames first) and the local variables of your code. The same error from
-the same place groups into one issue across requests, with a count.
+Tracepanel reports unhandled exceptions with the stack and the local variables of your code. The stack shows your
+frames first. Tracepanel groups the same error from the same place into one issue across requests, with a count.
 
 ## Tuning
 
-The thresholds are settings: `n_plus_one_threshold`, `slow_sql_ms`, `long_transaction_ms`
-([Configuration](configuration.md)).
+The thresholds are settings: `n_plus_one_threshold`, `slow_sql_ms` and `long_transaction_ms`. See
+[Configuration](configuration.md).

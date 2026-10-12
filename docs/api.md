@@ -13,8 +13,8 @@ def checkout(cart):
         charge(cart.owner, total)
 ```
 
-Queries, logs and errors inside a span attach to it. Outside a trace, and when Tracepanel is off, all of these do
-nothing, so they can stay in the code.
+Tracepanel attaches the queries, logs and errors inside a span to that span. Outside a trace, and when Tracepanel is
+off, all these functions do nothing, so you can leave them in your code.
 
 ```python
 @tracepanel.traced
@@ -26,7 +26,8 @@ tracepanel.set_attr("tenant", tenant.slug, on_trace=True)  # on the trace: searc
 tracepanel.event("cache warmed")  # a point on the timeline
 ```
 
-`tracepanel.trace()` makes a trace where there is none: a script, a scheduled job, a consumer of your own.
+`tracepanel.trace()` creates a trace in code that has none, such as a script, a scheduled job or a consumer of your
+own.
 
 ```python
 with tracepanel.trace("nightly import", kind="command"):

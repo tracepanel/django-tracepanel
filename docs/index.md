@@ -2,10 +2,10 @@
 
 See what your Django app is really doing.
 
-**Every request, query and task of your Django app, traced.** Each request your app serves becomes a trace: its
-SQL, cache calls, templates, signals, emails, logs, the tasks it queues and the errors it raises, in the order they
-happened. Tracepanel reads the trace for you and points at what to fix: an N+1 with the `select_related()` that
-removes it, duplicate queries, slow SQL, a transaction that holds its locks too long.
+Tracepanel turns each request your app serves into a trace. The trace holds the request's SQL, cache calls,
+templates, signals, emails, logs, the tasks it queues and the errors it raises, in the order they happened. Tracepanel
+reads the trace and points at what to fix. It finds an N+1 and names the `select_related()` that removes it. It also
+finds duplicate queries, slow SQL and transactions that hold their locks too long.
 
 ```bash
 pip install django-tracepanel
@@ -18,22 +18,22 @@ INSTALLED_APPS += ["tracepanel.django"]
 
 That is the whole setup. With `DEBUG = True`, open any page of your app.
 
-![Swagger UI with the panel docked under it: the requests made with Try it out, and the call tree of one with two N+1 queries](assets/screenshots/panel-call-tree.png)
+![Swagger UI with the panel docked under it, showing the requests made with Try it out and the call tree of one with two N+1 queries](assets/screenshots/panel-call-tree.png)
 
 ## What you get
 
-**A panel on every page.** A badge in the corner shows the request's status, time, queries and issues; click it for
-the panel, docked at the bottom or on the right like the browser's DevTools. It lists every request the page made,
-`fetch()` calls included, and opens each one: its call tree, its SQL, its logs.
+**A panel on every page.** A badge in the corner shows the request's status, time, queries and issues. Click it to
+open the panel. The panel docks at the bottom or on the right, like the browser's DevTools. It lists every request the
+page made, including `fetch()` calls. For each request it shows the call tree, the SQL and the logs.
 
-**A console at `/__tracepanel__/`.** Everything the app did, beyond one page: HTTP endpoints, GraphQL operations,
-Celery and other tasks, management commands, WebSocket consumers, with charts over time and a search across all of
-it.
+**A console at `/__tracepanel__/`.** The console shows everything the app did, beyond one page. It covers HTTP
+endpoints, GraphQL operations, Celery and other tasks, management commands and WebSocket consumers. It draws charts
+over time and searches across all of it.
 
 ![The console's HTTP page: requests and latency over time, the slowest and the failing endpoints](assets/screenshots/console-http.png)
 
-**A line in the terminal** for work with no page to show it on: each task run and management command ends with a
-summary and a link to its trace.
+**A line in the terminal.** Tasks and management commands have no page to show the panel on. Each task run and each
+management command ends with a summary line and a link to its trace.
 
 ## How it differs from django-debug-toolbar
 
@@ -45,5 +45,5 @@ summary and a link to its trace.
 | Findings | the raw queries | N+1, duplicates, slow SQL, long transactions, errors, each with the fix in Django's terms |
 | History | the current request | a local store of recent traces, searchable |
 
-Nothing leaves your machine: traces are kept in a SQLite file in your project (`.tracepanel/`), and the console is at
-your own app's address.
+Nothing leaves your machine. Tracepanel keeps traces in a SQLite file in `.tracepanel/` in your project, and your own
+app serves the console at its own address.

@@ -8,7 +8,7 @@ Tracepanel supports Django 5.2 and newer on Python 3.11 and newer.
 pip install django-tracepanel
 ```
 
-`django-tracepanel` has no code of its own: it is the same as `pip install "tracepanel[django]"`.
+`django-tracepanel` has no code of its own. Installing it is the same as `pip install "tracepanel[django]"`.
 
 Add the app:
 
@@ -17,25 +17,26 @@ Add the app:
 INSTALLED_APPS += ["tracepanel.django"]
 ```
 
-There is no middleware to add and no URL to include: the app puts its middleware first in `MIDDLEWARE` (so it measures
-the whole request) and answers under `/__tracepanel__/` itself.
+You don't add middleware or include URLs. The app puts its middleware first in `MIDDLEWARE`, so it measures the whole
+request. The app also serves `/__tracepanel__/` itself.
 
 ## Turn it on
 
-Tracepanel is on when `DEBUG = True`, and does nothing at all otherwise: no middleware, no patches. Start the server as
-usual:
+Tracepanel is on when `DEBUG = True`. Otherwise it does nothing, so it adds no middleware and patches nothing. Start
+the server as usual:
 
 ```bash
 python manage.py runserver
 ```
 
-The first line in the terminal says what is on:
+The first line in the terminal shows what Tracepanel turned on:
 
 ```text
 tracepanel ▸ on (DEBUG) · Django · logging, Celery, DRF → console at /__tracepanel__/
 ```
 
-Open any page: a badge appears in the bottom right corner. Click it for the panel. `/__tracepanel__/` is the console.
+Open any page, and a badge appears in the bottom right corner. Click it to open the panel. The console is at
+`/__tracepanel__/`.
 
 ## Without changing settings
 
@@ -46,9 +47,9 @@ tracepanel run python manage.py runserver
 tracepanel run celery -A config worker
 ```
 
-It adds `tracepanel.django` to `INSTALLED_APPS` as Django reads the settings, and turns Tracepanel on even when
-`DEBUG` is off (useful to look at production-like settings locally). With the app already in `INSTALLED_APPS`, it
-changes nothing more: one middleware, one trace per request.
+It adds `tracepanel.django` to `INSTALLED_APPS` while Django reads the settings. It turns Tracepanel on even when
+`DEBUG` is off, so you can look at production-like settings locally. If the app is already in `INSTALLED_APPS`,
+`tracepanel run` changes nothing more. You still get one middleware and one trace per request.
 
 ## Workers and commands
 
@@ -59,8 +60,8 @@ the terminal:
 tracepanel ▸ task newsletter.tasks.send_digest · success · 230 ms · 14 queries · n+1 → http://127.0.0.1:8765/#/t/01M4…
 ```
 
-The link opens the trace in the console, which the Tracepanel agent serves even with no web server running. To run
-it in the foreground, on a port of your choice:
+The link opens the trace in the console. The Tracepanel agent serves this console even when no web server is
+running. To run the agent in the foreground, on a port of your choice:
 
 ```bash
 tracepanel dev
@@ -68,6 +69,6 @@ tracepanel dev
 
 ## Next
 
-- [The panel and the console](panel.md): what each part shows.
-- [What it finds](issues.md): the issues Tracepanel reports, and how to fix them.
-- [Configuration](configuration.md): every setting.
+- [The panel and the console](panel.md) explains what each part shows.
+- [What it finds](issues.md) lists the issues Tracepanel reports and how to fix them.
+- [Configuration](configuration.md) lists every setting.
