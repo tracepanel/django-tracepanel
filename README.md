@@ -2,9 +2,9 @@
 
 **See what your Django app is really doing.** Tracepanel records each request,
 Celery task and management command of your Django app with its SQL queries,
-cache calls, templates, signals, emails, logs and errors. It points out N+1
-queries, duplicate queries, slow SQL and long transactions, and names the line
-of code to fix.
+cache calls, Redis commands, outgoing HTTP calls, templates, signals, emails,
+logs and errors. It points out N+1 queries and calls, duplicates, slow SQL and
+slow HTTP calls, and long transactions, and names the line of code to fix.
 
 ![Swagger UI with the panel docked under it: the requests made with Try it out, and the call tree of one with two N+1 queries](https://raw.githubusercontent.com/tracepanel/django-tracepanel/main/docs/assets/screenshots/panel-call-tree.png)
 

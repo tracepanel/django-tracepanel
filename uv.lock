@@ -256,7 +256,7 @@ wheels = [
 
 [[package]]
 name = "django-tracepanel"
-version = "0.0.1a1"
+version = "0.0.1a2"
 source = { editable = "." }
 dependencies = [
     { name = "tracepanel", extra = ["django"] },
@@ -815,7 +815,7 @@ wheels = [
 
 [[package]]
 name = "tracepanel"
-version = "0.0.1a1"
+version = "0.0.1a2"
 source = { editable = "../tracepanel-python" }
 dependencies = [
     { name = "tracepanel-agent", marker = "(platform_machine == 'aarch64' and sys_platform == 'linux') or (platform_machine == 'armv6l' and sys_platform == 'linux') or (platform_machine == 'armv7l' and sys_platform == 'linux') or (platform_machine == 'i686' and sys_platform == 'linux') or (platform_machine == 'ppc64le' and sys_platform == 'linux') or (platform_machine == 'riscv64' and sys_platform == 'linux') or (platform_machine == 's390x' and sys_platform == 'linux') or (platform_machine == 'x86_64' and sys_platform == 'linux') or (platform_machine == 'AMD64' and sys_platform == 'win32') or (platform_machine == 'ARM64' and sys_platform == 'win32') or (platform_machine == 'x86' and sys_platform == 'win32') or sys_platform == 'darwin'" },
@@ -853,6 +853,13 @@ channels = [
     { name = "channels", specifier = ">=4.3.2" },
     { name = "daphne", specifier = ">=4.2.3" },
 ]
+clients = [
+    { name = "aiohttp", specifier = ">=3.14.5" },
+    { name = "fakeredis", specifier = ">=2.39.0" },
+    { name = "httpx", specifier = ">=0.28.1" },
+    { name = "redis", specifier = ">=8.1.0" },
+    { name = "requests", specifier = ">=2.34.2" },
+]
 dev = [
     { name = "celery-types", specifier = ">=0.26.0" },
     { name = "dirty-equals", specifier = ">=0.11" },
@@ -878,6 +885,17 @@ dramatiq = [
     { name = "redis", specifier = ">=8.1.0" },
 ]
 drf = [{ name = "djangorestframework", specifier = ">=3.18.3" }]
+drivers = [
+    { name = "aiomysql", specifier = ">=0.3.2" },
+    { name = "aiosqlite", specifier = ">=0.22.1" },
+    { name = "asyncpg", specifier = ">=0.32.0" },
+    { name = "mysql-connector-python", specifier = ">=26.7.0" },
+    { name = "mysqlclient", specifier = ">=2.3.0" },
+    { name = "oracledb", specifier = ">=26.0.1" },
+    { name = "psycopg2-binary", specifier = ">=2.9.13" },
+    { name = "pymysql", specifier = ">=1.2.3" },
+    { name = "sqlalchemy", extras = ["asyncio"], specifier = ">=2.1.4" },
+]
 falcon = [{ name = "falcon", specifier = ">=4.2" }]
 fastapi = [
     { name = "fastapi", specifier = ">=0.142.4" },
@@ -900,7 +918,7 @@ strawberry = [{ name = "strawberry-graphql", specifier = ">=0.332.0" }]
 
 [[package]]
 name = "tracepanel-agent"
-version = "0.0.1a1"
+version = "0.0.1a2"
 source = { directory = "../tracepanel" }
 
 [[package]]

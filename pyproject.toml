@@ -3,13 +3,13 @@
 # are the same thing. Released together with tracepanel: keep `version` and the pin below equal to its version.
 [project]
 name = "django-tracepanel"
-version = "0.0.1a1"
+version = "0.0.1a2"
 description = "Traces and logs for Django apps: installs tracepanel with Django support, the same as tracepanel[django]"
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
 requires-python = ">=3.11"
-dependencies = ["tracepanel[django]==0.0.1a1"]
+dependencies = ["tracepanel[django]==0.0.1a2"]
 keywords = ["django", "debug toolbar", "n+1", "sql", "tracing", "logging", "profiling"]
 classifiers = [
     "Development Status :: 3 - Alpha",

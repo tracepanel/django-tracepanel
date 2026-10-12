@@ -46,7 +46,9 @@ Tracepanel reports an unknown name or a wrong type as an error, and the error na
 | `console_url` | `http://127.0.0.1:8765/` | The console of an agent set by address. |
 | `terminal_summary` | `true` | Print a line at startup and after each task and command. |
 | `n_plus_one_threshold` | `3` | How many similar queries from one place Tracepanel reports as an N+1. |
+| `n_plus_one_min_ms` | `5` | Repeated Redis commands or cache calls are reported only when they take this long together. |
 | `slow_sql_ms` | `100` | Tracepanel reports queries slower than this as slow SQL. |
+| `slow_http_ms` | `500` | Tracepanel reports outgoing HTTP calls slower than this as slow. |
 | `long_transaction_ms` | `500` | Tracepanel reports outer `atomic()` blocks longer than this. |
 | `capture_locals` | `true` | Keep the local variables of your frames in errors, masked. |
 | `capture_mail_body` | `true` | Keep the text and HTML of sent emails. |
@@ -57,4 +59,4 @@ Tracepanel reports an unknown name or a wrong type as an error, and the error na
 | `ignore_tasks` | none | Glob patterns on the name of tasks that Tracepanel doesn't trace, e.g. `celery.backend_cleanup`. |
 | `ignore_loggers` | none | Loggers that Tracepanel leaves out, with their children. |
 | `ignore_commands` | servers, shells and workers | Management commands that Tracepanel doesn't trace (`runserver`, `shell`, `test`, `rqworker`, …). |
-| `celery_enabled`, `channels_enabled`, `django_tasks_enabled`, `dramatiq_enabled`, `drf_enabled`, `logging_enabled`, `ninja_enabled`, `otel_enabled`, `rq_enabled`, `strawberry_enabled` | `true` | One per [integration](integrations.md). `false` leaves that library untouched. Tracepanel reads these at startup. |
+| `celery_enabled`, `channels_enabled`, `dbapi_enabled`, `django_tasks_enabled`, `dramatiq_enabled`, `drf_enabled`, `http_clients_enabled`, `logging_enabled`, `ninja_enabled`, `otel_enabled`, `redis_enabled`, `rq_enabled`, `strawberry_enabled` | `true` | One per [integration](integrations.md). `false` leaves that library untouched. Tracepanel reads these at startup. |
