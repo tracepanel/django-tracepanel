@@ -12,6 +12,14 @@ changes in each version is in
   [tracepanel.dev/docs/django](https://tracepanel.dev/docs/django), next to
   the rest of Tracepanel's. This repository keeps the README.
 
+## 0.0.1a2 (2026-10-12)
+
+### Changed
+
+- Installs `tracepanel[django]==0.0.1a2`: SQL from database drivers used
+  without the ORM, outgoing HTTP calls, Redis commands, and Django's cache with
+  its Redis commands inside, each with its issues.
+
 ## 0.0.1a1 (2026-10-12)
 
 ### Added
