@@ -4,6 +4,14 @@ django-tracepanel installs `tracepanel[django]` at its own version. What
 changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
 
+## 0.1.1 (2026-10-13)
+
+### Changed
+
+- Installs `tracepanel[django]==0.1.1`, with `tracepanel-agent` 0.1.1: the
+  console's Services map fits the width it has, and the Share dialog and the
+  Issues page describe what they do now.
+
 ## 0.1.0 (2026-10-13)
 
 ### Changed
