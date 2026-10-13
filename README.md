@@ -1,5 +1,10 @@
 # django-tracepanel
 
+[![CI](https://github.com/tracepanel/django-tracepanel/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/tracepanel/django-tracepanel/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/django-tracepanel)](https://pypi.org/project/django-tracepanel/)
+[![Python](https://img.shields.io/pypi/pyversions/django-tracepanel)](https://pypi.org/project/django-tracepanel/)
+[![Django](https://img.shields.io/pypi/djversions/django-tracepanel)](https://pypi.org/project/django-tracepanel/)
+
 **See what your Django app is really doing.** Tracepanel records each request,
 Celery task and management command of your Django app with its SQL queries,
 cache calls, Redis commands, outgoing HTTP calls, templates, signals, emails,
