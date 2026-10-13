@@ -6,7 +6,7 @@ cache calls, templates, signals, emails, logs and errors. It points out N+1
 queries, duplicate queries, slow SQL and long transactions, and names the line
 of code to fix.
 
-![Swagger UI with the panel docked under it: the requests made with Try it out, and the call tree of one with two N+1 queries](https://raw.githubusercontent.com/tracepanel/django-tracepanel/main/docs/assets/screenshots/panel-call-tree.png)
+![Swagger UI with the panel docked under it: the requests made with Try it out, and the call tree of one with two N+1 queries](https://raw.githubusercontent.com/tracepanel/django-tracepanel/main/assets/panel-call-tree.png)
 
 This package has no code of its own. It installs
 [tracepanel](https://github.com/tracepanel/tracepanel-python) with Django
@@ -41,16 +41,16 @@ The panel also lists the requests your pages and tools make with `fetch()`,
 here Swagger UI's Try it out. Each issue comes with its fix in Django's terms,
 such as the `select_related()` that removes an N+1:
 
-![The Issues tab of an API request made from Swagger UI: an N+1 with where it comes from and the fix](https://raw.githubusercontent.com/tracepanel/django-tracepanel/main/docs/assets/screenshots/panel-issues.png)
+![The Issues tab of an API request made from Swagger UI: an N+1 with where it comes from and the fix](https://raw.githubusercontent.com/tracepanel/django-tracepanel/main/assets/panel-issues.png)
 
 The console shows every endpoint over time, with the slowest and the failing
 ones:
 
-![The console's HTTP page: requests and latency over time, the slowest and the failing endpoints](https://raw.githubusercontent.com/tracepanel/django-tracepanel/main/docs/assets/screenshots/console-http.png)
+![The console's HTTP page: requests and latency over time, the slowest and the failing endpoints](https://raw.githubusercontent.com/tracepanel/django-tracepanel/main/assets/console-http.png)
 
 Work without a page, such as Celery tasks, has its own pages:
 
-![The console's Tasks page: runs and latency over time, the slowest and the failing tasks](https://raw.githubusercontent.com/tracepanel/django-tracepanel/main/docs/assets/screenshots/console-tasks.png)
+![The console's Tasks page: runs and latency over time, the slowest and the failing tasks](https://raw.githubusercontent.com/tracepanel/django-tracepanel/main/assets/console-tasks.png)
 
 ## Supported versions
 
@@ -59,9 +59,11 @@ or newer, and Python 3.15 runs with Django 6.1.
 
 ## Documentation
 
-The documentation lives in `docs/`, built with MkDocs and Material.
-`uv run poe docs` serves it at http://127.0.0.1:8000/, and
-`uv run poe docs-build` builds it the way CI does.
+The documentation is at
+[tracepanel.dev/docs/django](https://tracepanel.dev/docs/django): what
+Tracepanel records in Django, its settings, workers and commands. The panel,
+the console and the issues are the same in every framework, under
+[tracepanel.dev/docs](https://tracepanel.dev/docs).
 
 ## License
 

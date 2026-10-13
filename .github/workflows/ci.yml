@@ -1,9 +1,8 @@
-# The documentation and the package, checked against tracepanel-python.
+# The package, checked against tracepanel-python, and the README's spelling. The documentation is at
+# https://tracepanel.dev/docs/django.
 #
-# Everything here builds on tracepanel-python: the docs' API reference is read from its code, tools/lint_docs.py
-# checks the pages against its settings, and the package installs it. tracepanel in turn requires tracepanel-agent,
-# built from its checkout. Both are checked out next to this one, where uv.lock expects them (../tracepanel-python,
-# ../tracepanel). Nothing is published.
+# The package installs tracepanel, which requires tracepanel-agent, built from its checkout. Both are checked out next
+# to this one, where uv.lock expects them (../tracepanel-python, ../tracepanel). Nothing is published.
 name: CI
 
 on:
@@ -20,46 +19,15 @@ permissions:
   contents: read
 
 jobs:
-  docs:
-    name: Docs
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    defaults:
-      run:
-        working-directory: django-tracepanel
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v7
-        with:
-          path: django-tracepanel
-
-      - uses: actions/checkout@v7
-        with:
-          repository: tracepanel/tracepanel-python
-          path: tracepanel-python
-
-      - uses: actions/checkout@v7
-        with:
-          repository: tracepanel/tracepanel
-          path: tracepanel
-
       - uses: astral-sh/setup-uv@v10.3.0
-        with:
-          working-directory: django-tracepanel
-
-      - run: uv sync --frozen
-
-      - name: Lint (tools, spelling, the pages against the code)
-        run: uv run poe lint
-
-      - name: "Build (strict: a broken link or reference fails it)"
-        run: uv run mkdocs build --strict --site-dir site
-
-      - uses: actions/upload-artifact@v7
-        with:
-          name: docs-site
-          path: django-tracepanel/site
-          retention-days: 14
-          if-no-files-found: error
+      - name: Spelling of the README and the changelog
+        run: uvx codespell README.md CHANGELOG.md
 
   package:
     name: Package
