@@ -60,7 +60,7 @@ wheels = [
 
 [[package]]
 name = "django-tracepanel"
-version = "0.0.1a2"
+version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "tracepanel", extra = ["django"] },
@@ -169,7 +169,7 @@ wheels = [
 
 [[package]]
 name = "tracepanel"
-version = "0.0.1a2"
+version = "0.1.0"
 source = { editable = "../tracepanel-python" }
 dependencies = [
     { name = "tracepanel-agent", marker = "(platform_machine == 'aarch64' and sys_platform == 'linux') or (platform_machine == 'armv6l' and sys_platform == 'linux') or (platform_machine == 'armv7l' and sys_platform == 'linux') or (platform_machine == 'i686' and sys_platform == 'linux') or (platform_machine == 'ppc64le' and sys_platform == 'linux') or (platform_machine == 'riscv64' and sys_platform == 'linux') or (platform_machine == 's390x' and sys_platform == 'linux') or (platform_machine == 'x86_64' and sys_platform == 'linux') or (platform_machine == 'AMD64' and sys_platform == 'win32') or (platform_machine == 'ARM64' and sys_platform == 'win32') or (platform_machine == 'x86' and sys_platform == 'win32') or sys_platform == 'darwin'" },
@@ -193,13 +193,14 @@ requires-dist = [
     { name = "fastapi", marker = "extra == 'fastapi'", specifier = ">=0.142" },
     { name = "flask", marker = "extra == 'flask'", specifier = ">=3.0" },
     { name = "opentelemetry-sdk", marker = "extra == 'otel'", specifier = ">=1.45" },
+    { name = "pymongo", marker = "extra == 'mongodb'", specifier = ">=4.13" },
     { name = "rq", marker = "extra == 'rq'", specifier = ">=2.0" },
     { name = "sqlalchemy", marker = "extra == 'sqlalchemy'", specifier = ">=2.0" },
     { name = "starlette", marker = "extra == 'starlette'", specifier = ">=0.40" },
     { name = "strawberry-graphql", marker = "extra == 'strawberry'", specifier = ">=0.250" },
     { name = "tracepanel-agent", marker = "(platform_machine == 'aarch64' and sys_platform == 'linux') or (platform_machine == 'armv6l' and sys_platform == 'linux') or (platform_machine == 'armv7l' and sys_platform == 'linux') or (platform_machine == 'i686' and sys_platform == 'linux') or (platform_machine == 'ppc64le' and sys_platform == 'linux') or (platform_machine == 'riscv64' and sys_platform == 'linux') or (platform_machine == 's390x' and sys_platform == 'linux') or (platform_machine == 'x86_64' and sys_platform == 'linux') or (platform_machine == 'AMD64' and sys_platform == 'win32') or (platform_machine == 'ARM64' and sys_platform == 'win32') or (platform_machine == 'x86' and sys_platform == 'win32') or sys_platform == 'darwin'", directory = "../tracepanel" },
 ]
-provides-extras = ["django", "celery", "dramatiq", "rq", "channels", "strawberry", "fastapi", "starlette", "flask", "falcon", "sqlalchemy", "ninja", "drf", "otel"]
+provides-extras = ["django", "celery", "dramatiq", "rq", "channels", "strawberry", "fastapi", "starlette", "flask", "falcon", "sqlalchemy", "mongodb", "ninja", "drf", "otel"]
 
 [package.metadata.requires-dev]
 bench = [{ name = "pytest-codspeed", specifier = ">=5.0.3" }]
@@ -248,6 +249,7 @@ drivers = [
     { name = "mysqlclient", specifier = ">=2.3.0" },
     { name = "oracledb", specifier = ">=26.0.1" },
     { name = "psycopg2-binary", specifier = ">=2.9.13" },
+    { name = "pymongo", specifier = ">=4.18.3" },
     { name = "pymysql", specifier = ">=1.2.3" },
     { name = "sqlalchemy", extras = ["asyncio"], specifier = ">=2.1.4" },
 ]
@@ -273,7 +275,7 @@ strawberry = [{ name = "strawberry-graphql", specifier = ">=0.332.0" }]
 
 [[package]]
 name = "tracepanel-agent"
-version = "0.0.1a2"
+version = "0.1.0"
 source = { directory = "../tracepanel" }
 
 [[package]]
