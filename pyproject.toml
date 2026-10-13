@@ -3,13 +3,13 @@
 # are the same thing. Released together with tracepanel: keep `version` and the pin below equal to its version.
 [project]
 name = "django-tracepanel"
-version = "0.0.1a1"
+version = "0.0.1a2"
 description = "Traces and logs for Django apps: installs tracepanel with Django support, the same as tracepanel[django]"
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
 requires-python = ">=3.11"
-dependencies = ["tracepanel[django]==0.0.1a1"]
+dependencies = ["tracepanel[django]==0.0.1a2"]
 keywords = ["django", "debug toolbar", "n+1", "sql", "tracing", "logging", "profiling"]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -29,17 +29,14 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/tracepanel/tracepanel"
+Homepage = "https://tracepanel.dev"
+Documentation = "https://tracepanel.dev/docs/django"
+Source = "https://github.com/tracepanel/tracepanel"
 Repository = "https://github.com/tracepanel/django-tracepanel"
 Changelog = "https://github.com/tracepanel/django-tracepanel/blob/main/CHANGELOG.md"
 
 [dependency-groups]
-docs = [
-    "mkdocs>=1.6.1,<2",
-    "mkdocs-material>=9.7.7",
-    "mkdocstrings[python]>=1.0.6",
-]
-dev = ["ruff>=0.16.10", "codespell>=2.4.3", "poethepoet>=0.48.0"]
+dev = ["codespell>=2.4.3", "poethepoet>=0.48.0"]
 
 [build-system]
 requires = ["hatchling>=1.32.4"]
@@ -53,28 +50,12 @@ bypass-selection = true
 include = ["pyproject.toml", "README.md"]
 
 [tool.uv]
-default-groups = ["dev", "docs"]
-
-[tool.poe.tasks.docs]
-help = "Serve the documentation"
-cmd = "mkdocs serve"
-
-[tool.poe.tasks.docs-build]
-help = "Build the documentation as CI does: a broken link or reference fails it"
-cmd = "mkdocs build --strict"
+default-groups = ["dev"]
 
 [tool.poe.tasks.lint]
-help = "Lint the tools and the documentation"
-sequence = ["ruff format --check tools", "ruff check tools", "codespell docs README.md", "python tools/lint_docs.py"]
+help = "Check the spelling of the README and the changelog"
+sequence = ["codespell README.md CHANGELOG.md"]
 default_item_type = "cmd"
-
-[tool.ruff]
-line-length = 120
-target-version = "py311"
-
-[tool.ruff.lint]
-select = ["ALL"]
-ignore = ["COM812", "CPY", "D1", "D203", "D213", "S603", "T201", "INP001"]
 
 [tool.uv.sources]
 # Unpublished: resolve tracepanel from this checkout.
