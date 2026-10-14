@@ -4,6 +4,16 @@ django-tracepanel installs `tracepanel[django]` at its own version. What
 changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
 
+## 0.2.0 (2026-10-14)
+
+### Changed
+
+- Installs `tracepanel[django]==0.2.0`, with `tracepanel-agent` 0.2.0: the
+  console's Pages section lists what users do in the browser, which an SPA's
+  dev server sends through the app's console, and apps in many more
+  languages and frameworks are labelled. The console takes such writes from
+  this machine only, or from `INTERNAL_IPS`.
+
 ## 0.1.1 (2026-10-13)
 
 ### Changed
