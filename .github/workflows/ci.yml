@@ -55,16 +55,24 @@ jobs:
         with:
           working-directory: django-tracepanel
 
-      - name: Same version as tracepanel, pinned
+      - name: Same minor as tracepanel, pinned to it
         run: |
-          uv run --no-project --python 3.13 python - <<'PY'
+          uv run --no-project --python 3.13 --with packaging python - <<'PY'
           import tomllib
+          from packaging.requirements import Requirement
+          from packaging.version import Version
           proxy = tomllib.load(open("pyproject.toml", "rb"))["project"]
-          tracepanel = tomllib.load(open("../tracepanel-python/pyproject.toml", "rb"))["project"]
-          expected = (tracepanel["version"], [f"tracepanel[django]=={tracepanel['version']}"])
-          found = (proxy["version"], proxy["dependencies"])
-          assert found == expected, f"django-tracepanel {found} does not match tracepanel {expected}"
-          print(f"django-tracepanel {proxy['version']} pins tracepanel[django]=={tracepanel['version']}")
+          tracepanel = Version(tomllib.load(open("../tracepanel-python/pyproject.toml", "rb"))["project"]["version"])
+          version = Version(proxy["version"])
+          (pin,) = (Requirement(dep) for dep in proxy["dependencies"])
+          major, minor = tracepanel.release[:2]
+          assert version.release[:2] == (major, minor), f"django-tracepanel {version}, tracepanel {tracepanel}: another minor"
+          assert pin.name == "tracepanel" and pin.extras == {"django"}, f"pins {pin}"
+          lower = next((Version(s.version) for s in pin.specifier if s.operator == ">="), None)
+          bounds = {s.operator + s.version for s in pin.specifier}
+          assert lower is not None and bounds == {f">={lower}", f"<{major}.{minor + 1}"}, f"pins {pin}: not one minor"
+          assert pin.specifier.contains(tracepanel), f"django-tracepanel pins {pin}, tracepanel is {tracepanel}"
+          print(f"django-tracepanel {version} pins {pin}, tracepanel is {tracepanel}")
           PY
 
       - name: Build

@@ -1,15 +1,16 @@
 # django-tracepanel: the name Django developers search for. No code of its own: it installs tracepanel with Django
-# (`tracepanel[django]`) at the same version, so `pip install django-tracepanel` and `pip install "tracepanel[django]"`
-# are the same thing. Released together with tracepanel: keep `version` and the pin below equal to its version.
+# (`tracepanel[django]`), any patch of its own minor version, so `pip install django-tracepanel` and
+# `pip install "tracepanel[django]"` are the same thing. Released on each minor of tracepanel, with the pin below
+# covering that minor; tracepanel's patches reach it without a release here.
 [project]
 name = "django-tracepanel"
-version = "0.3.1"
+version = "0.3.2"
 description = "Traces and logs for Django apps: installs tracepanel with Django support, the same as tracepanel[django]"
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
 requires-python = ">=3.11"
-dependencies = ["tracepanel[django]==0.3.1"]
+dependencies = ["tracepanel[django]>=0.3.2,<0.4"]
 keywords = ["django", "debug toolbar", "n+1", "sql", "tracing", "logging", "profiling"]
 classifiers = [
     "Development Status :: 4 - Beta",

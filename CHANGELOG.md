@@ -1,8 +1,17 @@
 # Changelog
 
-django-tracepanel installs `tracepanel[django]` at its own version. What
-changes in each version is in
+django-tracepanel installs `tracepanel[django]`, any patch of its own minor
+version. What changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
+
+## 0.3.2 (2026-10-17)
+
+### Changed
+
+- Installs any `tracepanel[django]` 0.3 from 0.3.2 on, rather than exactly
+  its own version. tracepanel's patches now reach a Django project without a
+  django-tracepanel release. 0.3.2 fixes a SQLAlchemy `AUTOCOMMIT`
+  connection shown as a transaction.
 
 ## 0.3.1 (2026-10-16)
 
