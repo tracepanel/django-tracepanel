@@ -1,7 +1,7 @@
 name: Release
 
 # A tag that names a version publishes it to PyPI. Nothing else does. Release tracepanel first: this package pins
-# tracepanel[django] at its own version, and the job installs it from PyPI before publishing.
+# tracepanel[django] to its own minor, and the job installs it from PyPI before publishing.
 on:
   push:
     tags: ["[0-9]+.[0-9]+.[0-9]+*"]
@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: The tag is the version, and tracepanel's
+      - name: The tag is the version, and tracepanel's pin covers its minor
         run: |
           uv run --no-project --with packaging python - <<'EOF'
           import os, sys, tomllib
@@ -36,8 +36,16 @@ jobs:
           project = tomllib.load(open("pyproject.toml", "rb"))["project"]
           tracepanel = next(Requirement(dep) for dep in project["dependencies"] if dep.startswith("tracepanel"))
           tag, version = Version(os.environ["GITHUB_REF_NAME"]), Version(project["version"])
-          if not tag == version or str(tracepanel.specifier) != f"=={version}":
-              sys.exit(f"::error::tag {tag}, version {version}, tracepanel {tracepanel.specifier}: they must agree")
+          major, minor = version.release[:2]
+          lower = next((Version(s.version) for s in tracepanel.specifier if s.operator == ">="), None)
+          covers = (
+              lower is not None
+              and lower.release[:2] == (major, minor)
+              and {s.operator + s.version for s in tracepanel.specifier} == {f">={lower}", f"<{major}.{minor + 1}"}
+          )
+          if tag != version or not covers:
+              sys.exit(f"::error::tag {tag}, version {version}, tracepanel {tracepanel.specifier}: the tag must be the "
+                       f"version, tracepanel >={major}.{minor}.N,<{major}.{minor + 1}")
           EOF
 
       - name: Build
