@@ -4,6 +4,17 @@ django-tracepanel installs `tracepanel[django]`, any patch of its own minor
 version. What changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
 
+## 0.4.1 (2026-10-21)
+
+### Changed
+
+- Installs `tracepanel[django]` 0.4.1 or a later patch, with
+  `tracepanel-agent` 0.4.1: a sync view's profile under an ASGI server shows
+  the view, not the event loop waiting; a Celery task's arguments read the
+  same while queued and running; a forked worker (RQ, Celery's prefork pool,
+  gunicorn's preload) no longer hangs on a lock its parent held; and each
+  log record in the console carries its date.
+
 ## 0.4.0 (2026-10-21)
 
 ### Changed
