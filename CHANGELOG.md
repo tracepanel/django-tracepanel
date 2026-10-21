@@ -4,6 +4,16 @@ django-tracepanel installs `tracepanel[django]`, any patch of its own minor
 version. What changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
 
+## 0.4.0 (2026-10-21)
+
+### Changed
+
+- Installs `tracepanel[django]` 0.4, with `tracepanel-agent` 0.4.0: the
+  panel's Request and Profile tabs, a form's POST that redirected listed
+  before the page it led to, the place in the app that made a library's
+  query, Celery, RQ, Dramatiq and Django Tasks in flight on the console's
+  Tasks page, and logs by level, with their exceptions as frames.
+
 ## 0.3.2 (2026-10-17)
 
 ### Changed
