@@ -10,6 +10,8 @@ version. What changes in each version is in
 
 - The README opens with the 40-second demo video: Swagger UI's Try it out
   with the panel docked under it.
+- The README's panel screenshots show Swagger UI in its light theme beside the
+  dark panel.
 
 ## 0.5.3 (2026-10-26)
 
