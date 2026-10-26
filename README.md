@@ -63,13 +63,13 @@ is at `/__tracepanel__/`.
 Each request shows its call tree, with the SQL queries, the calls and the
 issues in it:
 
-![Swagger UI's endpoints on the left, one run with Try it out and its 200 response, and the panel docked on the right with the same request's call tree and its two N+1 queries](https://raw.githubusercontent.com/tracepanel/django-tracepanel/main/assets/panel-call-tree.png)
+![Swagger UI's endpoint run with Try it out and the start of its 200 response, and the panel docked under it with the same request's call tree and its two N+1 queries](https://raw.githubusercontent.com/tracepanel/django-tracepanel/main/assets/panel-call-tree.png)
 
 The panel also lists the requests your pages and tools make with `fetch()`,
 here Swagger UI's Try it out. Each issue comes with its fix in Django's terms,
 such as the `select_related()` that removes an N+1:
 
-![Swagger UI's endpoints on the left, one run with Try it out, and the panel's Issues tab for that request on the right: each N+1 with where it comes from and the fix](https://raw.githubusercontent.com/tracepanel/django-tracepanel/main/assets/panel-issues.png)
+![Swagger UI's endpoint run with Try it out, and the panel docked under it on that request's Issues tab: each N+1 with where it comes from and the fix](https://raw.githubusercontent.com/tracepanel/django-tracepanel/main/assets/panel-issues.png)
 
 The console shows every endpoint over time, with the slowest and the failing
 ones:
