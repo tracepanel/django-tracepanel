@@ -11,7 +11,9 @@ cache calls, Redis commands, outgoing HTTP calls, templates, signals, emails,
 logs and errors. It points out N+1 queries and calls, duplicates, slow SQL and
 slow HTTP calls, and long transactions, and names the line of code to fix.
 
-![Swagger UI's endpoints on the left, one run with Try it out and its 200 response, and the panel docked on the right with the same request's call tree and its two N+1 queries](https://raw.githubusercontent.com/tracepanel/django-tracepanel/main/assets/panel-call-tree.png)
+[![A 40-second demo: Swagger UI's Try it out on an endpoint, and the panel docked under it with the request's call tree, an N+1 with its query plan, a background task, its profile, and the same call after the fix](https://raw.githubusercontent.com/tracepanel/django-tracepanel/main/assets/demo-video.jpg)](https://tracepanel.dev/video/demo.mp4)
+
+▶ [Watch the 40-second demo](https://tracepanel.dev/video/demo.mp4)
 
 ## Works with
 
@@ -57,6 +59,11 @@ Open any page and click the badge in the corner to open the panel. The console
 is at `/__tracepanel__/`.
 
 ## What it looks like
+
+Each request shows its call tree, with the SQL queries, the calls and the
+issues in it:
+
+![Swagger UI's endpoints on the left, one run with Try it out and its 200 response, and the panel docked on the right with the same request's call tree and its two N+1 queries](https://raw.githubusercontent.com/tracepanel/django-tracepanel/main/assets/panel-call-tree.png)
 
 The panel also lists the requests your pages and tools make with `fetch()`,
 here Swagger UI's Try it out. Each issue comes with its fix in Django's terms,
