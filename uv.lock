@@ -60,7 +60,7 @@ wheels = [
 
 [[package]]
 name = "django-tracepanel"
-version = "0.4.1"
+version = "0.5.0"
 source = { editable = "." }
 dependencies = [
     { name = "tracepanel", extra = ["django"] },
@@ -169,7 +169,7 @@ wheels = [
 
 [[package]]
 name = "tracepanel"
-version = "0.4.1"
+version = "0.5.0"
 source = { editable = "../tracepanel-python" }
 dependencies = [
     { name = "tracepanel-agent", marker = "(platform_machine == 'aarch64' and sys_platform == 'linux') or (platform_machine == 'armv6l' and sys_platform == 'linux') or (platform_machine == 'armv7l' and sys_platform == 'linux') or (platform_machine == 'i686' and sys_platform == 'linux') or (platform_machine == 'ppc64le' and sys_platform == 'linux') or (platform_machine == 'riscv64' and sys_platform == 'linux') or (platform_machine == 's390x' and sys_platform == 'linux') or (platform_machine == 'x86_64' and sys_platform == 'linux') or (platform_machine == 'AMD64' and sys_platform == 'win32') or (platform_machine == 'ARM64' and sys_platform == 'win32') or (platform_machine == 'x86' and sys_platform == 'win32') or sys_platform == 'darwin'" },
@@ -187,27 +187,41 @@ requires-dist = [
     { name = "channels", marker = "extra == 'channels'", specifier = ">=4.2" },
     { name = "django", marker = "extra == 'django'", specifier = ">=5.2" },
     { name = "django-ninja", marker = "extra == 'ninja'", specifier = ">=1.4" },
+    { name = "django-q2", marker = "extra == 'django-q2'", specifier = ">=1.9" },
     { name = "djangorestframework", marker = "extra == 'drf'", specifier = ">=3.15" },
     { name = "dramatiq", marker = "extra == 'dramatiq'", specifier = ">=1.17" },
     { name = "falcon", marker = "extra == 'falcon'", specifier = ">=4.0" },
     { name = "fastapi", marker = "extra == 'fastapi'", specifier = ">=0.142" },
+    { name = "faststream", marker = "extra == 'faststream'", specifier = ">=0.6" },
     { name = "flask", marker = "extra == 'flask'", specifier = ">=3.0" },
+    { name = "huey", marker = "extra == 'huey'", specifier = ">=2.5" },
     { name = "opentelemetry-sdk", marker = "extra == 'otel'", specifier = ">=1.45" },
     { name = "pymongo", marker = "extra == 'mongodb'", specifier = ">=4.13" },
     { name = "rq", marker = "extra == 'rq'", specifier = ">=2.0" },
     { name = "sqlalchemy", marker = "extra == 'sqlalchemy'", specifier = ">=2.0" },
     { name = "starlette", marker = "extra == 'starlette'", specifier = ">=0.40" },
     { name = "strawberry-graphql", marker = "extra == 'strawberry'", specifier = ">=0.250" },
+    { name = "taskiq", marker = "extra == 'taskiq'", specifier = ">=0.13" },
     { name = "tracepanel-agent", marker = "(platform_machine == 'aarch64' and sys_platform == 'linux') or (platform_machine == 'armv6l' and sys_platform == 'linux') or (platform_machine == 'armv7l' and sys_platform == 'linux') or (platform_machine == 'i686' and sys_platform == 'linux') or (platform_machine == 'ppc64le' and sys_platform == 'linux') or (platform_machine == 'riscv64' and sys_platform == 'linux') or (platform_machine == 's390x' and sys_platform == 'linux') or (platform_machine == 'x86_64' and sys_platform == 'linux') or (platform_machine == 'AMD64' and sys_platform == 'win32') or (platform_machine == 'ARM64' and sys_platform == 'win32') or (platform_machine == 'x86' and sys_platform == 'win32') or sys_platform == 'darwin'", directory = "../tracepanel" },
 ]
-provides-extras = ["django", "celery", "dramatiq", "rq", "channels", "strawberry", "fastapi", "starlette", "flask", "falcon", "sqlalchemy", "mongodb", "ninja", "drf", "otel"]
+provides-extras = ["django", "celery", "dramatiq", "faststream", "rq", "huey", "taskiq", "django-q2", "channels", "strawberry", "fastapi", "starlette", "flask", "falcon", "sqlalchemy", "mongodb", "ninja", "drf", "otel"]
 
 [package.metadata.requires-dev]
+aws = [
+    { name = "aiobotocore", specifier = ">=3.10" },
+    { name = "boto3", specifier = ">=1.43" },
+    { name = "django-storages", extras = ["s3"], specifier = ">=1.14.6" },
+    { name = "flask", specifier = ">=3.1.3" },
+    { name = "flask-cors", specifier = ">=6.0.5" },
+    { name = "moto", extras = ["s3", "dynamodb"], specifier = ">=5.2.4" },
+]
 bench = [{ name = "pytest-codspeed", specifier = ">=5.0.3" }]
 celery = [{ name = "celery", specifier = ">=5.6.3" }]
 channels = [
     { name = "channels", specifier = ">=4.3.2" },
+    { name = "channels-redis", specifier = ">=4.3.0" },
     { name = "daphne", specifier = ">=4.2.3" },
+    { name = "lupa", marker = "python_full_version < '3.15'", specifier = ">=2.8" },
 ]
 clients = [
     { name = "aiohttp", specifier = ">=3.14.5" },
@@ -227,11 +241,13 @@ dev = [
     { name = "pyrefly", specifier = ">=1.3" },
     { name = "pytest" },
     { name = "pytest-django" },
+    { name = "pytest-xdist", specifier = ">=3.8" },
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "ruff", specifier = ">=0.16" },
     { name = "types-jsonschema" },
     { name = "types-pyyaml", specifier = ">=6.0.12.20260906" },
 ]
+django-q2 = [{ name = "django-q2", specifier = ">=1.11.1" }]
 django-tasks = [
     { name = "django-tasks", specifier = ">=0.12.0" },
     { name = "django-tasks-db", specifier = ">=0.13.0" },
@@ -246,12 +262,15 @@ drivers = [
     { name = "aiosqlite", specifier = ">=0.22.1" },
     { name = "asyncmy", specifier = ">=0.2.16" },
     { name = "asyncpg", specifier = ">=0.32.0" },
+    { name = "mssql-django", marker = "python_full_version < '3.15'", specifier = ">=1.8,<2" },
     { name = "mysql-connector-python", specifier = ">=26.7.0" },
     { name = "mysqlclient", specifier = ">=2.3.0" },
     { name = "oracledb", specifier = ">=26.0.1" },
     { name = "psycopg2-binary", specifier = ">=2.9.13" },
     { name = "pymongo", specifier = ">=4.18.3" },
+    { name = "pymssql", specifier = ">=2.4.5" },
     { name = "pymysql", specifier = ">=1.2.3" },
+    { name = "pyodbc", marker = "python_full_version < '3.15'", specifier = ">=5.3.0" },
     { name = "sqlalchemy", extras = ["asyncio"], specifier = ">=2.1.4" },
 ]
 falcon = [{ name = "falcon", specifier = ">=4.2" }]
@@ -259,12 +278,27 @@ fastapi = [
     { name = "fastapi", specifier = ">=0.142.4" },
     { name = "httpx2", specifier = ">=2.13.1" },
     { name = "sqlalchemy", specifier = ">=2.1.4" },
+    { name = "uvicorn", specifier = ">=0.54.0" },
+]
+faststream = [
+    { name = "fastapi", specifier = ">=0.142.4" },
+    { name = "faststream", extras = ["confluent"], marker = "python_full_version < '3.15'", specifier = ">=0.7.7" },
+    { name = "faststream", extras = ["kafka", "nats", "rabbit", "redis"], specifier = ">=0.7.7" },
+    { name = "faststream-fastapi", specifier = ">=1.4.0" },
+    { name = "httpx2", specifier = ">=2.13.1" },
 ]
 flask = [
     { name = "flask", specifier = ">=3.1.3" },
     { name = "flask-login", specifier = ">=0.6.3" },
     { name = "flask-sqlalchemy", specifier = ">=3.1.1" },
+    { name = "gunicorn", specifier = ">=26.2.0" },
     { name = "sqlalchemy", specifier = ">=2.1.4" },
+]
+graphene = [{ name = "graphene-django", specifier = ">=3.2.3" }]
+huey = [{ name = "huey", specifier = ">=3.4.0" }]
+llm = [
+    { name = "anthropic", specifier = ">=2.3.0" },
+    { name = "openai", specifier = ">=3.37.0" },
 ]
 ninja = [{ name = "django-ninja", specifier = ">=1.7.1" }]
 otel = [{ name = "opentelemetry-sdk", specifier = ">=1.45.1" }]
@@ -274,10 +308,14 @@ rq = [
     { name = "rq", specifier = ">=2.12.0" },
 ]
 strawberry = [{ name = "strawberry-graphql", specifier = ">=0.332.0" }]
+taskiq = [
+    { name = "taskiq", specifier = ">=0.13.0" },
+    { name = "taskiq-fastapi", specifier = ">=0.5.0" },
+]
 
 [[package]]
 name = "tracepanel-agent"
-version = "0.4.1"
+version = "0.5.0"
 source = { directory = "../tracepanel" }
 
 [[package]]

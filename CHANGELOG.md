@@ -4,6 +4,24 @@ django-tracepanel installs `tracepanel[django]`, any patch of its own minor
 version. What changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
 
+## 0.5.0 (2026-10-26)
+
+Needs `tracepanel` 0.5.0 (installed with it).
+
+### Changed
+
+- Installs `tracepanel[django]` 0.5, with `tracepanel-agent` 0.5.0. For a
+  Django project it brings a pytest plugin that fails a test on an N+1 or
+  duplicate queries, `migrate` with a span per migration and operation and
+  the ones that lock a table marked, file storages and `collectstatic`,
+  signals with their sender and each receiver's line, and the template line
+  of a query a template made. It adds Graphene, Huey, django-q2, Taskiq,
+  Channels workers, SQL Server, AWS and the OpenAI and Anthropic SDKs.
+  Responses keep their body, template spans their context, and the App tab
+  shows the settings, system checks and unapplied migrations.
+- A profile counts memory only when asked for. It slowed the whole process
+  down while a trace was profiled.
+
 ## 0.4.1 (2026-10-21)
 
 ### Changed
