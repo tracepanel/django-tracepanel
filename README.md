@@ -57,14 +57,38 @@ Work without a page, such as Celery tasks, has its own pages:
 
 ![The console's Tasks page: runs and latency over time, the slowest and the failing tasks](https://raw.githubusercontent.com/tracepanel/django-tracepanel/main/assets/console-tasks.png)
 
-## Supported versions
+## Supports
 
-Django 5.2, 6.0 and 6.1 on Python 3.11 and newer. Django 6.x needs Python 3.12
-or newer, and Python 3.15 runs with Django 6.1.
+Django 5.2, 6.0 and 6.1 on Python 3.11 to 3.15, each pair tested in CI.
+Django 6.x needs Python 3.12 or newer, and Python 3.15 runs with Django 6.1.
+
+- **Django**: requests and views, sync and async, under `runserver` or any
+  WSGI or ASGI server. Templates, Django's and Jinja2, with their context.
+  The cache, signals, email, logins and logouts, file storages and
+  `collectstatic`, management commands, `migrate` and its operations, and the
+  App tab's settings, system checks and unapplied migrations.
+- **Databases**: the ORM's queries and `atomic()` blocks on any database,
+  tested on SQLite, PostgreSQL and SQL Server (mssql-django). Queries sent
+  through a driver directly too: sqlite3, aiosqlite, psycopg, psycopg2,
+  asyncpg, PyMySQL, mysqlclient, MySQL Connector, aiomysql, asyncmy,
+  python-oracledb, pyodbc and pymssql. EXPLAIN on PostgreSQL, MySQL, SQLite
+  and SQL Server. SQLAlchemy and MongoDB (PyMongo) as well.
+- **APIs**: Django REST framework, Django Ninja, Graphene, Strawberry and
+  htmx.
+- **Background work**: Celery, Dramatiq, RQ, Huey, django-q2, Taskiq, Django
+  Tasks (Django 6.0, or the `django-tasks` backport on 5.2) and Channels, its
+  WebSocket consumers and workers.
+- **Clients**: requests and anything else on urllib3, httpx, aiohttp, Redis
+  and Valkey, AWS through boto3 and aiobotocore, and the OpenAI and Anthropic
+  SDKs. Spans from OpenTelemetry instrumentations join the trace.
+- **Profiling**: where a request's or a task's time goes, from the panel. Its
+  memory too, when asked for.
+- **Tests**: `pytest --tracepanel` fails a test that makes an N+1 or
+  duplicate queries, with pytest-django and pytest-xdist.
 
 ## Documentation
 
-The documentation is at
+The Django guide is at
 [tracepanel.dev/docs/django](https://tracepanel.dev/docs/django): what
 Tracepanel records in Django, its settings, workers and commands. The panel,
 the console and the issues are the same in every framework, under
