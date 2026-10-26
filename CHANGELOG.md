@@ -4,6 +4,12 @@ django-tracepanel installs `tracepanel[django]`, any patch of its own minor
 version. What changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
 
+## 0.5.2 (2026-10-26)
+
+### Changed
+
+- The README shows the console in its default dark theme.
+
 ## 0.5.1 (2026-10-26)
 
 ### Changed
