@@ -4,7 +4,7 @@
 # covering that minor; tracepanel's patches reach it without a release here.
 [project]
 name = "django-tracepanel"
-version = "0.5.1"
+version = "0.5.2"
 description = "Traces and logs for Django apps: installs tracepanel with Django support, the same as tracepanel[django]"
 readme = "README.md"
 license = "MIT"
