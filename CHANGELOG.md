@@ -4,6 +4,14 @@ django-tracepanel installs `tracepanel[django]`, any patch of its own minor
 version. What changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
 
+## 0.5.1 (2026-10-26)
+
+### Changed
+
+- The README lists what django-tracepanel works with near the top, from the
+  Python and Django versions to the databases, APIs and task queues, and its
+  screenshots show the current panel and console.
+
 ## 0.5.0 (2026-10-26)
 
 Needs `tracepanel` 0.5.0 (installed with it).
