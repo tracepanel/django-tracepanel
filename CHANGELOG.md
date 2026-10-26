@@ -4,6 +4,14 @@ django-tracepanel installs `tracepanel[django]`, any patch of its own minor
 version. What changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
 
+## 0.5.3 (2026-10-26)
+
+### Changed
+
+- The README's panel screenshots show Swagger UI's endpoints beside the panel:
+  the request run with Try it out, its response, and the same request's call
+  tree and issues.
+
 ## 0.5.2 (2026-10-26)
 
 ### Changed
