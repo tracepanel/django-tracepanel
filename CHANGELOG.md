@@ -4,6 +4,21 @@ django-tracepanel installs `tracepanel[django]`, any patch of its own minor
 version. What changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
 
+## 0.6.0 (2026-10-28)
+
+Needs `tracepanel` 0.6.0 (installed with it).
+
+### Changed
+
+- Installs `tracepanel[django]` 0.6, with `tracepanel-agent` 0.6.0. Its MCP
+  server reads profiles: `get_profile` gives a profiled request's CPU or
+  memory profile as text, `get_trace` says when a trace was profiled, and
+  `compare_traces` shows how the profile changed, so an AI coding agent can
+  profile a view, fix the code and check the result without the console. A
+  query on a schema-qualified table (`FROM "public"."book"`) is named by the
+  table alone, `SELECT book`. A long source path in a query's details wraps
+  instead of making the details pane scroll sideways.
+
 ## 0.5.4 (2026-10-26)
 
 ### Changed
