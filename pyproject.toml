@@ -4,13 +4,13 @@
 # covering that minor; tracepanel's patches reach it without a release here.
 [project]
 name = "django-tracepanel"
-version = "0.7.0"
+version = "0.8.0"
 description = "Traces and logs for Django apps: installs tracepanel with Django support, the same as tracepanel[django]"
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
 requires-python = ">=3.11"
-dependencies = ["tracepanel[django]>=0.7.0,<0.8"]
+dependencies = ["tracepanel[django]>=0.8.0,<0.9"]
 keywords = [
     "django",
     "debug toolbar",

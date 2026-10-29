@@ -4,6 +4,17 @@ django-tracepanel installs `tracepanel[django]`, any patch of its own minor
 version. What changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
 
+## 0.8.0 (2026-10-29)
+
+Needs `tracepanel` 0.8.0 (installed with it).
+
+### Changed
+
+- Installs `tracepanel[django]` 0.8, with `tracepanel-agent` 0.8.0. A
+  shared snapshot holds the request's whole chain of calls, the chain's
+  Profile tab has the memory its traces counted, and the MCP tool
+  `get_profile` reads the profiles of the traces down a trace's calls too.
+
 ## 0.7.0 (2026-10-29)
 
 Needs `tracepanel` 0.7.0 (installed with it).
