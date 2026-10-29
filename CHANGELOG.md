@@ -4,6 +4,20 @@ django-tracepanel installs `tracepanel[django]`, any patch of its own minor
 version. What changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
 
+## 0.7.0 (2026-10-29)
+
+Needs `tracepanel` 0.7.0 (installed with it).
+
+### Changed
+
+- Installs `tracepanel[django]` 0.7, with `tracepanel-agent` 0.7.0. A
+  request is shown across the apps it went through: a frontend's call, the
+  Django view behind it and its queries are one tree. The DB, HTTP calls,
+  Logs, Issues and Profile tabs cover the whole chain. EXPLAIN of a query
+  runs in the app that recorded it, from any console, and a Django console
+  sends another app's query to the agent instead of running it on its own
+  database.
+
 ## 0.6.0 (2026-10-28)
 
 Needs `tracepanel` 0.6.0 (installed with it).
