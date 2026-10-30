@@ -19,6 +19,32 @@ permissions:
   contents: read
 
 jobs:
+  changes:
+    name: What changed
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      # paths-filter lists a pull request's files through the API.
+      pull-requests: read
+    outputs:
+      code: ${{ github.event_name != 'pull_request' || steps.code.outputs.code == 'true' }}
+    steps:
+      # A pull request that changes only the pages (the README and its images, the changelog) or the license builds
+      # nothing: Package, skipped whole, counts as passed. Lint checks the pages, so it always runs.
+      - if: github.event_name == 'pull_request'
+        id: code
+        uses: dorny/paths-filter@v4.0.3
+        with:
+          predicate-quantifier: every
+          filters: |
+            code:
+              - "**"
+              - "!**/*.md"
+              - "!LICENSE"
+              - "!docs/**"
+              - "!assets/**"
+
   lint:
     name: Lint
     runs-on: ubuntu-latest
@@ -31,6 +57,8 @@ jobs:
 
   package:
     name: Package
+    needs: [changes]
+    if: needs.changes.outputs.code == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     defaults:
