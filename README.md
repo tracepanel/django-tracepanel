@@ -76,7 +76,7 @@ ones:
 
 ![The console's HTTP page: requests and latency over time, the slowest and the failing endpoints](https://raw.githubusercontent.com/tracepanel/django-tracepanel/main/assets/console-http.png)
 
-Work without a page, such as Celery tasks, has its own pages:
+Work outside a request, such as Celery tasks, has its own pages:
 
 ![The console's Tasks page: runs and latency over time, the slowest and the failing tasks](https://raw.githubusercontent.com/tracepanel/django-tracepanel/main/assets/console-tasks.png)
 
