@@ -4,6 +4,18 @@ django-tracepanel installs `tracepanel[django]`, any patch of its own minor
 version. What changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
 
+## 0.9.0 (2026-10-30)
+
+Needs `tracepanel` 0.9.0 (installed with it).
+
+### Changed
+
+- Installs `tracepanel[django]` 0.9, with `tracepanel-agent` 0.9.0. Apollo
+  Router's calls to its subgraphs link their traces over OTLP, a span from
+  OpenTelemetry shows what came over OTLP and why, a project's agent takes
+  OTLP on its own port (`TRACEPANEL_OTLP`), and queries are named and
+  grouped without their comments.
+
 ## 0.8.0 (2026-10-29)
 
 Needs `tracepanel` 0.8.0 (installed with it).
