@@ -4,6 +4,18 @@ django-tracepanel installs `tracepanel[django]`, any patch of its own minor
 version. What changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
 
+## 0.10.0 (2026-10-31)
+
+Needs `tracepanel` 0.10.0 (installed with it).
+
+### Changed
+
+- Installs `tracepanel[django]` 0.10, with `tracepanel-agent` 0.10.0.
+  python-devtools' `debug()` calls are dumps in the call tree, slow-query and
+  long-transaction limits can be set per database, `tracepanel.profile()`
+  profiles the rest of a trace from code and the Profile tab says why a trace
+  was profiled, and secrets are masked by one word-by-word rule.
+
 ## 0.9.0 (2026-10-30)
 
 Needs `tracepanel` 0.9.0 (installed with it).
