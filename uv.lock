@@ -60,7 +60,7 @@ wheels = [
 
 [[package]]
 name = "django-tracepanel"
-version = "0.9.0"
+version = "0.10.0"
 source = { editable = "." }
 dependencies = [
     { name = "tracepanel", extra = ["django"] },
@@ -169,7 +169,7 @@ wheels = [
 
 [[package]]
 name = "tracepanel"
-version = "0.9.0"
+version = "0.10.0"
 source = { editable = "../tracepanel-python" }
 dependencies = [
     { name = "tracepanel-agent", marker = "(platform_machine == 'aarch64' and sys_platform == 'linux') or (platform_machine == 'armv6l' and sys_platform == 'linux') or (platform_machine == 'armv7l' and sys_platform == 'linux') or (platform_machine == 'i686' and sys_platform == 'linux') or (platform_machine == 'ppc64le' and sys_platform == 'linux') or (platform_machine == 'riscv64' and sys_platform == 'linux') or (platform_machine == 's390x' and sys_platform == 'linux') or (platform_machine == 'x86_64' and sys_platform == 'linux') or (platform_machine == 'AMD64' and sys_platform == 'win32') or (platform_machine == 'ARM64' and sys_platform == 'win32') or (platform_machine == 'x86' and sys_platform == 'win32') or sys_platform == 'darwin'" },
@@ -247,6 +247,7 @@ dev = [
     { name = "types-jsonschema" },
     { name = "types-pyyaml", specifier = ">=6.0.12.20260906" },
 ]
+devtools = [{ name = "devtools", specifier = ">=0.13.0" }]
 django-q2 = [{ name = "django-q2", specifier = ">=1.11.1" }]
 django-tasks = [
     { name = "django-tasks", specifier = ">=0.12.0" },
@@ -324,7 +325,7 @@ taskiq = [
 
 [[package]]
 name = "tracepanel-agent"
-version = "0.9.0"
+version = "0.10.0"
 source = { directory = "../tracepanel" }
 
 [[package]]
