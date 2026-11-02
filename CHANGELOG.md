@@ -4,6 +4,17 @@ django-tracepanel installs `tracepanel[django]`, any patch of its own minor
 version. What changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
 
+## 0.11.0 (2026-11-02)
+
+Needs `tracepanel` 0.11.0 (installed with it).
+
+### Changed
+
+- Installs `tracepanel[django]` 0.11, with `tracepanel-agent` 0.11.0. A
+  profile shows only your code with the waits under the function that
+  waited, an async task's own code shows in every run, and the call tree's
+  time strip counts waiting apart from your code.
+
 ## 0.10.0 (2026-10-31)
 
 Needs `tracepanel` 0.10.0 (installed with it).
