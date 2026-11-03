@@ -4,6 +4,18 @@ django-tracepanel installs `tracepanel[django]`, any patch of its own minor
 version. What changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
 
+## 0.13.0 (2026-11-03)
+
+Needs `tracepanel` 0.13.0 (installed with it).
+
+### Changed
+
+- Installs `tracepanel[django]` 0.13, with `tracepanel-agent` 0.13.0.
+  The call tree shows the apps a view called as soon as their traces
+  are stored, a call to a host that sends no traces says "not traced",
+  every body copies, and a test that overrides a Django setting no
+  longer sees the old value now and then.
+
 ## 0.12.0 (2026-11-02)
 
 Needs `tracepanel` 0.12.0 (installed with it).
