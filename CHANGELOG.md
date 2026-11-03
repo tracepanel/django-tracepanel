@@ -4,6 +4,18 @@ django-tracepanel installs `tracepanel[django]`, any patch of its own minor
 version. What changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
 
+## 0.13.1 (2026-11-03)
+
+Needs `tracepanel` 0.13.1 (installed with it).
+
+### Changed
+
+- Installs `tracepanel[django]` 0.13.1, with `tracepanel-agent` 0.13.1.
+  The panel's rows, pill and hover card show the same requests and the
+  same numbers, never a partial sum or a time that goes down, a call's
+  status stays whole in a narrow dock, and a call with no answer keeps
+  its row.
+
 ## 0.13.0 (2026-11-03)
 
 Needs `tracepanel` 0.13.0 (installed with it).
