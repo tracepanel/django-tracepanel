@@ -4,6 +4,18 @@ django-tracepanel installs `tracepanel[django]`, any patch of its own minor
 version. What changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
 
+## 0.14.0 (2026-11-04)
+
+Needs `tracepanel` 0.14.0 (installed with it).
+
+### Changed
+
+- Installs `tracepanel[django]` 0.14, with `tracepanel-agent` 0.14.0. A
+  trace's time is split one way in the time strip, the Profile tab, the
+  panel's card and the MCP server, the shares add up to the total as it is
+  written, Database is the time in queries, and a profile's sampler no
+  longer hands missed ticks to the wrong function.
+
 ## 0.13.1 (2026-11-03)
 
 Needs `tracepanel` 0.13.1 (installed with it).
