@@ -4,6 +4,16 @@ django-tracepanel installs `tracepanel[django]`, any patch of its own minor
 version. What changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
 
+## 0.16.0 (2026-11-10)
+
+Needs `tracepanel` 0.16.0 (installed with it).
+
+### Changed
+
+- Installs `tracepanel[django]` 0.16, with `tracepanel-agent` 0.16.0: a
+  call no trace answered has no "not traced" label, and a flame graph keeps
+  its zoom while the chain reloads.
+
 ## 0.15.0 (2026-11-06)
 
 Needs `tracepanel` 0.15.0 (installed with it).
