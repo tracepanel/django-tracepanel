@@ -4,6 +4,16 @@ django-tracepanel installs `tracepanel[django]`, any patch of its own minor
 version. What changes in each version is in
 [tracepanel's changelog](https://github.com/tracepanel/tracepanel-python/blob/main/CHANGELOG.md).
 
+## 0.17.0 (2026-11-20)
+
+Needs `tracepanel` 0.17.0 (installed with it).
+
+### Changed
+
+- Installs `tracepanel[django]` 0.17, with `tracepanel-agent` 0.17.0: a
+  trace's DB tab shows share bars, totals and N+1 fixes, and an N+1's time
+  is its time on the clock everywhere.
+
 ## 0.16.0 (2026-11-10)
 
 Needs `tracepanel` 0.16.0 (installed with it).
